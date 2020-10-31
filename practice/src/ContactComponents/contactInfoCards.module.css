@@ -1,0 +1,43 @@
+* {
+  padding: 0;
+  margin: 0;
+  box-sizing: content-box;
+}
+
+.mainGrid {
+  margin-top: 2vw;
+  display: grid;
+  grid-template-rows: minmax(20px, 70px);
+  justify-content: space-around;
+  row-gap: 1vw;
+  background-color: teal;
+}
+
+.logo {
+  grid-row: 2;
+  align-self: start;
+  justify-self: center;
+  color: tomato;
+  font-size: 5vw;
+}
+.heading {
+  margin-top: 1vw;
+  grid-row: 3;
+  justify-self: center;
+  align-self: end;
+  text-transform: uppercase;
+  font-size: 1.5vw;
+  font-weight: bolder;
+  color: white;
+}
+
+.content {
+  grid-row: 4;
+  justify-self: center;
+  padding: 4vw;
+  align-self: start;
+  font-size: 1.5vw;
+  font-weight: lighter;
+  text-align: center;
+  color: white;
+}

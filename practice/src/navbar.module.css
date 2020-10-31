@@ -1,0 +1,112 @@
+* {
+  padding: 0;
+  margin: 0;
+  box-sizing: content-box;
+}
+
+.navBar {
+  position: fixed;
+  background-color: transparent;
+  display: flex;
+  width: 100vw;
+  height: 12vh;
+  flex-direction: row;
+  list-style: none;
+  z-index: 99;
+}
+.navBarScrolled {
+  position: fixed;
+  background-color: rgb(6, 6, 26);
+  display: flex;
+  width: 100vw;
+  height: 12vh;
+  flex-direction: row;
+  list-style: none;
+  z-index: 99;
+}
+
+.flexStart {
+  align-self: center;
+  flex: 0.8;
+}
+
+.webLogo {
+  font-size: 3.5vw;
+  color: tomato;
+  align-self: center;
+}
+
+.webName {
+  align-self: center;
+  font-family: "Anton", sans-serif;
+  font-size: 2.4vw;
+  font-weight: 900;
+  color: whitesmoke;
+  font-weight: lighter;
+  letter-spacing: 0.04cm;
+}
+
+.centerFlex {
+  flex: 2;
+  align-self: center;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-around;
+}
+
+.navLinks {
+  color: black;
+  font-size: 2.2vh;
+  font-family: "Montserrat", sans-serif;
+  text-transform: uppercase;
+  font-weight: bold;
+  color: whitesmoke;
+}
+
+.navLinks:hover {
+  cursor: pointer;
+}
+
+.endFlex {
+  flex: 1;
+  align-self: center;
+  color: tomato;
+}
+
+.tel_phone_logo {
+  margin-left: 35%;
+  font-size: 5vh;
+}
+
+.tel_phone {
+  font-family: "Montserrat", sans-serif;
+  align-self: center;
+  font-size: 3vh;
+}
+
+.end_flex_1 {
+  display: none;
+}
+
+.menu {
+  display: none;
+  font-size: larger;
+  color: white;
+}
+
+@media (max-width: 1120px) {
+  .centerFlex {
+    display: none;
+  }
+
+  .endFlex {
+    display: none;
+  }
+  .end_flex_1 {
+    display: visible;
+    flex: 1;
+    align-self: center;
+    color: tomato;
+    justify-self: end;
+  }
+}
