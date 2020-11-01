@@ -1,7 +1,9 @@
 import React from "react";
 import Styles from "./homeToAboutGrid.module.css";
+import { useHistory } from "react-router-dom";
 
 export default function HomeToAbout() {
+  const history = useHistory();
   return (
     <div>
       <div className={Styles.mainGrid}>
@@ -21,7 +23,12 @@ export default function HomeToAbout() {
           penatibus et magnis dis parturient montes, nascetur ridiculus mus.
           Aliquam lorem ante, dapibus in.
         </div>
-        <button className={Styles.button}>Learn More </button>
+        <button
+          className={Styles.button}
+          onClick={() => history.push("./about")}
+        >
+          Learn More{" "}
+        </button>
       </div>
     </div>
   );

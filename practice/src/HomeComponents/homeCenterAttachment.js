@@ -1,7 +1,9 @@
 import React from "react";
 import Styles from "./homeCenterAttachment.module.css";
+import { useHistory } from "react-router-dom";
 
 export default function HomeCenterAttachment() {
+  const history = useHistory();
   return (
     <div className={Styles.grid}>
       <div className={Styles.mainGrid}>
@@ -10,7 +12,12 @@ export default function HomeCenterAttachment() {
         <div className={Styles.mainContent_2}>
           <span style={{ color: "tomato" }}>summer 25% </span>discount
         </div>
-        <button className={Styles.button}>Join today</button>
+        <button
+          className={Styles.button}
+          onClick={() => history.push("./membership")}
+        >
+          Join today
+        </button>
       </div>
     </div>
   );

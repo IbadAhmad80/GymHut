@@ -23,8 +23,10 @@ import abs from "../assets/abs.jpg";
 import gym from "../assets/gym.jpg";
 import man from "../assets/man.jpg";
 import Fotter from "../footer";
+import { useHistory } from "react-router-dom";
 
 export default function Home() {
+  const history = useHistory();
   return (
     <div>
       <div className={Styles.grid}>
@@ -44,7 +46,11 @@ export default function Home() {
           <div className={Styles.moto_1}>Step up your</div>
           <div className={Styles.moto_2}> fitness challenge</div>
           <div className={Styles.moto_3}> with us</div>
-          <button type="button" className={Styles.join_us_button}>
+          <button
+            type="button"
+            className={Styles.join_us_button}
+            onClick={() => history.push("/membership")}
+          >
             Join Us Now &nbsp;
             <FiArrowRight />
           </button>

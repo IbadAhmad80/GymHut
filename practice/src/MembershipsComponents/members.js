@@ -15,8 +15,10 @@ import man from "../assets/man.jpg";
 import { TiTick } from "react-icons/ti";
 import { ImCross } from "react-icons/im";
 import PopularCourses from "./popularCourses";
+import { useHistory } from "react-router-dom";
 
 export default function Membership() {
+  const history = useHistory();
   return (
     <div>
       <div className={Styles.grid}>
@@ -126,7 +128,11 @@ export default function Membership() {
           mentor={"Etzabeth Milen"}
           no={"3"}
         />
-        <button type="button" className={Styles.all_courses_button}>
+        <button
+          type="button"
+          className={Styles.all_courses_button}
+          onClick={() => history.push("./courses")}
+        >
           See all our courses
         </button>
       </div>

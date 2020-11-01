@@ -57,4 +57,12 @@
   color: tomato;
   font-size: 1.1vw;
   font-weight: bold;
+  transition: font-size;
+  transition-duration: 200ms;
+  transition-timing-function: linear;
+}
+
+.read_more:hover {
+  font-size: 1.3vw;
+  cursor: pointer;
 }

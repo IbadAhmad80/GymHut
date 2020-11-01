@@ -1,7 +1,9 @@
 import React from "react";
 import Styles from "./aboutusTop.module.css";
+import { useHistory } from "react-router-dom";
 
 export default function AboutUs() {
+  const history = useHistory();
   return (
     <div>
       <div className={Styles.mainGrid}>
@@ -17,7 +19,11 @@ export default function AboutUs() {
           penatibus et magnis dis parturient montes, nascetur ridiculus mus.
           Aliquam lorem ante, dapibus in.
         </div>
-        <button type="button" className={Styles.serviceButton}>
+        <button
+          type="button"
+          className={Styles.serviceButton}
+          onClick={() => history.push("./courses")}
+        >
           Services
         </button>
       </div>

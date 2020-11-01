@@ -42,6 +42,7 @@ export default function About() {
           }
           background_Color={" rgb(44, 42, 42)"}
           logo_color={"white"}
+          color={"rgb(230, 227, 220)"}
         />
         <HomeServiceCatalog
           GiCycling={GiWeightLiftingUp}
@@ -60,6 +61,7 @@ export default function About() {
           }
           background_Color={" rgb(44, 42, 42)"}
           logo_color={"white"}
+          color={"rgb(230, 227, 220)"}
         />
       </div>
       <div className={Styles.row_1_why_us}>
@@ -80,6 +82,7 @@ export default function About() {
           }
           background_Color={" rgb(44, 42, 42)"}
           logo_color={"white"}
+          color={"rgb(230, 227, 220)"}
         />
         <HomeServiceCatalog
           GiCycling={AiFillLike}

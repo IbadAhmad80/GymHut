@@ -69,9 +69,11 @@
   padding-right: 1.5vw;
   color: black;
   border-left: 6px solid orange;
+  outline: none;
 }
 
 .last_name {
+  outline: none;
   margin-left: 3vw;
   grid-column: 2;
   grid-row: 2;
@@ -101,6 +103,7 @@
   padding-right: 1.5vw;
   color: black;
   border-left: 6px solid orange;
+  outline: none;
 }
 
 .contact {
@@ -118,6 +121,7 @@
   padding-right: 1.5vw;
   color: black;
   border-left: 6px solid orange;
+  outline: none;
 }
 
 .text_area {
@@ -135,6 +139,7 @@
   padding-right: 1.5vw;
   color: black;
   border-left: 6px solid orange;
+  outline: none;
 }
 
 .submit_button {
