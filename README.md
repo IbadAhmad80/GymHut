@@ -1,0 +1,1 @@
+# GymHut template clone
