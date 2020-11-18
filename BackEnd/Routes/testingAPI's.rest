@@ -1,0 +1,12 @@
+###
+
+POST http://localhost:3000/members
+content-type: application/json
+
+{
+"fullName":"ibad",
+"email":"ibad12ahmad@gmail.com",
+"password":"123456",
+"phoneNumber":"921111111111",
+"type":"Gold"
+}
