@@ -39,11 +39,13 @@
 }
 
 .cardContainer {
+  margin-top: 8vw;
   display: grid;
   margin-left: 3vw;
   margin-right: 3vw;
   grid-template-columns: 1fr 1fr 1fr;
   grid-template-rows: minmax(100px, 400px);
+  grid-column-gap: 2vw;
 }
 
 .modals {

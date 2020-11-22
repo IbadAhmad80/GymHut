@@ -12,6 +12,7 @@ import plank from "../assets/plank.jpg";
 import abs from "../assets/abs.jpg";
 import gym from "../assets/gym.jpg";
 import man from "../assets/man.jpg";
+import Model from "./model";
 import { TiTick } from "react-icons/ti";
 import { ImCross } from "react-icons/im";
 import PopularCourses from "./popularCourses";
@@ -136,24 +137,22 @@ export default function Membership() {
           See all our courses
         </button>
       </div>
+
       <div className={Styles.imageCatalog}>
         <div className={Styles.imageborderTop}>___</div>
-        <div className={Styles.imageHeading}>Our Gallery</div>
+        <div className={Styles.imageHeading}>BMI Predictor</div>
         <div className={Styles.imageSub_heading}>
-          We offer group exercises, aerobic classes each week.
+          Tell us your figures and our model will evaluate.
         </div>
       </div>
-      <div className={Styles.imageGallery}>
-        <HomeImageGallery image={bodybuilder_1} />
-        <HomeImageGallery image={gym} />
-        <HomeImageGallery image={plank} />
-        <HomeImageGallery image={sport_3} />
-        <HomeImageGallery image={man} />
-        <HomeImageGallery image={abs} />
-        <HomeImageGallery image={bodybuilder} />
-        <HomeImageGallery image={athlete} />
+      <div className={Styles.modelContainer}>
+        <div className={Styles.model}>
+          <Model />{" "}
+        </div>
+        <div className={Styles.modelImage}>
+          <div style={{ visibility: "hidden" }}>ddddddddddddddddddddd</div>
+        </div>
       </div>
-
       <Fotter />
     </div>
   );

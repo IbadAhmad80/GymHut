@@ -5,6 +5,11 @@ import { FiArrowRight } from "react-icons/fi";
 import HomeCards from "./homeCards";
 import HomeToAboutGrid from "./homeToAboutGrid";
 import HomeCenterAttachment from "./homeCenterAttachment";
+import HomeInfoCards from "../ContactComponents/contactInfoCards";
+import { FaHome, FaPhoneVolume } from "react-icons/fa";
+import { BiMessageRoundedDetail } from "react-icons/bi";
+import Styles_1 from "../ContactComponents/contact.module.css";
+
 import {
   GiWeightLiftingUp,
   GiMuscleUp,
@@ -168,6 +173,23 @@ export default function Home() {
         <HomeImageGallery image={bodybuilder_1} />
         <HomeImageGallery image={athlete} />
         <HomeImageGallery image={gym} />
+      </div>
+      <div className={Styles_1.cardContainer}>
+        <HomeInfoCards
+          FaHome={FaHome}
+          heading={"Location"}
+          content={"Bedford Heights , London , Uk."}
+        />
+        <HomeInfoCards
+          FaHome={FaPhoneVolume}
+          heading={"Phone"}
+          content={"+92 - 34563 - 45."}
+        />
+        <HomeInfoCards
+          FaHome={BiMessageRoundedDetail}
+          heading={"Email"}
+          content={"support@GymHub.com."}
+        />
       </div>
       <Fotter />
     </div>

@@ -3,6 +3,10 @@ const express = require("express");
 const Courses = require("../Schemas/coursesSchema");
 const router = express.Router();
 const Members = require("../Schemas/membershipSchema");
+const stripe = require("stripe")(
+  "sk_test_51HndUcEynMwgZp7ZkpUr5Gn8XVucBYgvZqt7CBgSfU7HXBsIpfP3WfwQBDWHpIFASzfHNHqyigvoAi6g4ZL7ebAm00m85IKY3n"
+);
+const uuid = require("uuid");
 
 router.get("/", async (req, res) => {
   try {
@@ -27,35 +31,41 @@ router.post("/enrollment", async (req, res) => {
   let status;
   try {
     const { course, coursePrice, token } = req.body;
-
-    const customer = await stripe.customers.create({
-      email: token.email,
-      source: token.id,
+    const member = await Members.find({
+      email: token.email.toLowerCase(),
+      enrolled_in: course,
     });
+    if (Object.entries(member).length === 0) {
+      const customer = await stripe.customers.create({
+        email: token.email.toLowerCase(),
+        source: token.id,
+      });
 
-    const idempotency_key = uuid.v4();
-    const charge = await stripe.charges.create(
-      {
-        amount: coursePrice,
-        currency: "usd",
-        customer: customer.id,
-        receipt_email: token.email,
-        description: `Purchased the ${course} course`,
-      },
-      {
-        idempotency_key,
-      }
-    );
+      const idempotency_key = uuid.v4();
+      const charge = await stripe.charges.create(
+        {
+          amount: coursePrice,
+          currency: "usd",
+          customer: customer.id,
+          receipt_email: token.email,
+          description: `Purchased the ${course} course`,
+        },
+        {
+          idempotency_key,
+        }
+      );
 
-    // console.log(`Token email ${token.email}`);
-    await Members.updateOne(
-      { email: token.email },
-      { $push: { enrolled_in: course } }
-    );
+      await Members.updateOne(
+        { email: token.email.toLowerCase() },
+        { $push: { enrolled_in: course } }
+      );
 
-    await Courses.updateOne({ name: course }, { $inc: { students: 1 } });
-    status = "success";
-    res.json({ status: status });
+      await Courses.updateOne({ name: course }, { $inc: { students: 1 } });
+      status = "success";
+      res.json({ status: status });
+    } else {
+      res.status(401).send("You are Already enrolled in this course ");
+    }
   } catch (error) {
     status = "failure";
     console.log("error : ", error);

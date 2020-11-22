@@ -22,10 +22,11 @@ export default function SignInForm({
   price,
   course,
 }) {
-  console.log(
-    `membership type : ${membership} \n price : ${price} \n payment type  ${payment} \n course name : ${course}`
-  );
-  const coursePrice = price;
+  // console.log(
+  //   `membership type : ${membershipValue} \n price : ${price} \n payment type  ${payment} \n course name : ${course}`
+  // );
+
+  const [membershipValue, setMembershipValue] = useState("");
   const [state, setState] = useState({ visible: false });
 
   const show = () => {
@@ -37,12 +38,6 @@ export default function SignInForm({
   };
   const [stripe, setStripe] = useState(true);
 
-  const setPrice = () => {
-    if (membership === "none") {
-    } else {
-    }
-  };
-
   const handleStripe = (token, _) => {
     console.log(token);
     if (payment === "set") {
@@ -52,63 +47,56 @@ export default function SignInForm({
           token,
         })
         .then((response) => {
+          const { status } = response.data;
+
+          if (status === "success") {
+            toast(`Success! Check email for details `, {
+              type: "info",
+            });
+          }
+        })
+        .catch((error) => {
+          if (error.response) {
+            toast(`${error.response.data}`, { type: "error" });
+          }
+        });
+    } else if (payment === "non-set") {
+      const response = axios;
+      let coursePrice =
+        payment === "set"
+          ? membership === "Standard"
+            ? 12 * 100
+            : membership === "Pro"
+            ? 25 * 100
+            : 39 * 100
+          : membershipValue === "none"
+          ? price
+          : membershipValue === "Standard"
+          ? price * 75
+          : membershipValue === "Pro"
+          ? price * 50
+          : price * 25;
+      axios
+        .post("http://localhost:3000/courses/enrollment", {
+          course,
+          coursePrice,
+          token,
+        })
+        .then((response) => {
           console.log("Response:", response.data);
           const { status } = response.data;
 
           if (status === "success") {
-            toast("Success! Check email for details", { type: "info" });
+            toast(`Success! Enrolled in ${course}`, { type: "info" });
           }
         })
         .catch((error) => {
-          toast("Something went wrong", { type: "error" });
+          if (error.response) {
+            toast(`${error.response.data}`, { type: "error" });
+          }
         });
-    } else if (payment === "non-set") {
-      if (membership === "none") {
-        const course = course;
-        const response = axios
-          .post("http://localhost:3000/courses/enrollment", {
-            course,
-            price,
-            token,
-          })
-          .then((response) => {
-            console.log("Response:", response.data);
-            const { status } = response.data;
-
-            if (status === "success") {
-              toast("Success! Check email for details", { type: "info" });
-            }
-          })
-          .catch((error) => {
-            toast("Something went wrong", { type: "error" });
-          });
-      } else {
-        const coursePrice =
-          membership === "Standard"
-            ? (price * 75) / 100
-            : membership === "Pro"
-            ? (price * 50) / 100
-            : (price * 25) / 100;
-        const course = course;
-        const response = axios
-          .post("http://localhost:3000/courses/enrollment", {
-            course,
-            coursePrice,
-            token,
-          })
-          .then((response) => {
-            console.log("Response:", response.data);
-            const { status } = response.data;
-
-            if (status === "success") {
-              toast("Success! Check email for details", { type: "info" });
-            }
-          })
-          .catch((error) => {
-            toast("Something went wrong", { type: "error" });
-          });
-      }
     }
+    setStripe(true);
   };
 
   const initialValues = {
@@ -129,17 +117,17 @@ export default function SignInForm({
         initialValues={initialValues}
         validationSchema={SignInSchema}
         onSubmit={(values) => {
+          setStripe(true);
           initialValues.email = values.email;
           initialValues.password = values.password;
-          console.log(initialValues);
           axios
             .post("http://localhost:3000/members/signIn", initialValues)
             .then((response) => {
               toast("Account has been accessed successfully", {
                 type: "success",
               });
-              console.log("Response from server :", response);
               setStripe(false);
+              setMembershipValue(response.data[0].type);
             })
             .catch((error) => {
               if (error.response) {
@@ -240,7 +228,7 @@ export default function SignInForm({
                       onClick={show}
                       type="button"
                     >
-                      Already a User?
+                      Not a User?
                     </button>
                     <Rodal
                       height={400}
@@ -277,41 +265,44 @@ export default function SignInForm({
                 >
                   Continue
                 </button>
-                <div
-                  className={
-                    payment === "set"
-                      ? Styles.course_payment
-                      : Styles.member_payment
-                  }
-                >
-                  <StripeCheckout
-                    stripeKey="pk_test_51HndUcEynMwgZp7ZbDkkWsib4j8KiQJSN1m0B5GyvLpbNBmKflvbEBOJvTkAOMrF8HVWttyYeg0h6cO4WgvPbgpv00bxeRO8cs"
-                    token={handleStripe}
-                    name={"Payment SetUp"}
-                    amount={
-                      membership === "Standard"
-                        ? 12 * 100
-                        : membership === "Pro"
-                        ? 25 * 100
-                        : 39 * 100
-                    }
-                  >
-                    <button
-                      className={
-                        stripe === true ? Styles.disabledButton : Styles.pay
-                      }
-                      disabled={stripe}
-                    >
-                      Pay with Card
-                    </button>
-                  </StripeCheckout>
-                </div>
-                )
               </Form>
             </div>
           );
         }}
       </Formik>
+      <div
+        className={
+          payment === "set" ? Styles.course_payment : Styles.member_payment
+        }
+      >
+        <StripeCheckout
+          stripeKey="pk_test_51HndUcEynMwgZp7ZbDkkWsib4j8KiQJSN1m0B5GyvLpbNBmKflvbEBOJvTkAOMrF8HVWttyYeg0h6cO4WgvPbgpv00bxeRO8cs"
+          token={handleStripe}
+          name={"Payment SetUp"}
+          amount={
+            payment === "set"
+              ? membership === "Standard"
+                ? 12 * 100
+                : membership === "Pro"
+                ? 25 * 100
+                : 39 * 100
+              : membershipValue === "none"
+              ? price
+              : membershipValue === "Standard"
+              ? price * 75
+              : membershipValue === "Pro"
+              ? price * 50
+              : price * 25
+          }
+        >
+          <button
+            className={stripe === true ? Styles.disabledButton : Styles.pay}
+            disabled={stripe}
+          >
+            Pay with Card
+          </button>
+        </StripeCheckout>
+      </div>
     </div>
   );
 }

@@ -17,9 +17,7 @@ export default function CourseStats({
     color: "gray",
     fontFamily: "'Quicksand', sans-serif",
   };
-  console.log(
-    `calories : ${calories} \n intensity : ${intensity} \n hours : ${hours}`
-  );
+
   return (
     <div>
       <div className={Styles.mainFlex}>

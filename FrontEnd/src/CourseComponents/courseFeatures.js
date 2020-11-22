@@ -64,7 +64,7 @@ export default class Features extends React.Component {
             Join Now
           </button>
           <Rodal
-            height={320}
+            height={340}
             width={450}
             visible={this.state.visible}
             onClose={this.hide.bind(this)}
@@ -83,23 +83,13 @@ export default class Features extends React.Component {
               Course Enrollment
             </h2>
 
-            {this.props.payment === "set" ? (
-              <SignInForm
-                type={"course"}
-                membership={this.props.membership}
-                payment={"set"}
-                price={this.props.price}
-                course={this.props.name}
-              />
-            ) : (
-              <SignInForm
-                type={"course"}
-                membership={"none"}
-                payment={"non-set"}
-                price={this.props.price}
-                course={this.props.name}
-              />
-            )}
+            <SignInForm
+              type={"course"}
+              membership={"none"}
+              payment={"non-set"}
+              price={this.props.price}
+              course={this.props.name}
+            />
           </Rodal>
         </div>
       );
@@ -137,7 +127,13 @@ export default class Features extends React.Component {
             >
               Payment SetUp
             </h2>
-            <SignInForm type={"course"} />
+            <SignInForm
+              type={"course"}
+              membership={this.props.membership}
+              payment={"set"}
+              price={this.props.price}
+              course={this.props.name}
+            />
           </Rodal>
         </div>
       );

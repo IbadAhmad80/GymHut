@@ -50,7 +50,6 @@
   padding: 0.9vw;
   font-size: 1vw;
 }
-
 .pay {
   letter-spacing: 0.02cm;
   text-transform: uppercase;
@@ -63,7 +62,7 @@
 }
 
 .course_payment {
-  margin-left: 17.7vw;
+  margin-left: 17vw;
   margin-top: 2vw;
 }
 

@@ -1,12 +1,12 @@
 ###
 
-POST http://localhost:3000/members
+POST http://localhost:3000/members/signIn
 content-type: application/json
 
 {
-"fullName":"ibad",
-"email":"ibad12ahmad@gmail.com",
-"password":"123456",
-"phoneNumber":"921111111111",
-"type":"Gold"
+// "fullName":"ibad",
+"email":"ibad23ahmad@gmail.com",
+"password":"22222222"
+// "phoneNumber":"921111111111",
+// "type":"Gold"
 }

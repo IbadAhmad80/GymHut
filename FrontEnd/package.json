@@ -14,6 +14,7 @@
     "axios": "^0.21.0",
     "formik": "^2.2.2",
     "framer-motion": "^2.8.0",
+    "glamor": "^2.20.40",
     "react": "^16.13.1",
     "react-animated-modal": "^1.1.1",
     "react-dom": "^16.13.1",

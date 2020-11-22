@@ -51,8 +51,12 @@ export default function MemberShipForm({ type, membership }) {
         }
       })
       .catch((error) => {
-        toast("Something went wrong", { type: "error" });
+        if (error.response) {
+          toast(`${error.response.data}`, { type: "error" });
+          console.log(`error ${error.response.data}`);
+        }
       });
+    setStripe(true);
   };
   const SignInSchema = Yup.object().shape({
     fullName: Yup.string()
