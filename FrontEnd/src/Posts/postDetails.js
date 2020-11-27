@@ -12,8 +12,13 @@ import UpvotePost from "./upvotePost";
 import SameAuthor from "./sameAuthor";
 import axios from "axios";
 import { useHistory } from "react-router-dom";
+import Loader from "react-loader-spinner";
+// importing all the css for loader
+import "react-loader-spinner/dist/loader/css/react-spinner-loader.css";
 
 export default function PostDetails() {
+  const [loadingAut, isLoadingAut] = useState(false);
+  const [loadingCat, isLoadingCat] = useState(false);
   const history = useHistory();
   const location = useLocation();
   const [sameCat, setSameCat] = useState({ singlePost: [] });
@@ -25,6 +30,8 @@ export default function PostDetails() {
       .get(`http://localhost:3000/posts/author/${location.author}`)
       .then((response) => {
         setSameAut({ singlePost: response.data });
+
+        isLoadingAut(true);
       })
       .catch((error) => {
         console.log("error is :", error);
@@ -34,6 +41,7 @@ export default function PostDetails() {
       .get(`http://localhost:3000/posts/category/${location.category}`)
       .then((response) => {
         setSameCat({ singlePost: response.data });
+        isLoadingCat(true);
       })
       .catch((error) => {
         console.log("error is :", error);
@@ -101,18 +109,6 @@ export default function PostDetails() {
               nec augue eu laore
             </div>
           </div>
-          <div
-            style={{
-              marginTop: "4vw",
-              marginBottom: "5vw",
-              fontSize: "2.3vw",
-              fontWeight: "bolder",
-              fontFamily: "'Quicksand', sans-serif",
-              marginBottom: "1vw",
-            }}
-          >
-            More From Author
-          </div>
         </div>
         <div className={Styles.rightGrid}>
           <div
@@ -159,12 +155,36 @@ export default function PostDetails() {
               Similar Posts
             </span>
           </h4>
-          {sameCat.singlePost.map(({ name }) => (
-            <PopularPost
-              title={name}
-              id={Math.ceil(Math.random() * 4).toString()}
-            ></PopularPost>
-          ))}
+          {loadingCat === false ? (
+            <div
+              style={{
+                marginTop: "3vw",
+                textAlign: "center",
+                fontSize: "1.5vw",
+                fontWeight: "medium",
+                marginBottom: "3vw",
+              }}
+            >
+              Loading&nbsp;&nbsp;&nbsp;
+              <span>
+                <Loader
+                  type="Puff"
+                  color="#00BFFF"
+                  height={50}
+                  width={70}
+                  timeout={1000000} //1000 secs
+                />
+              </span>
+            </div>
+          ) : (
+            sameCat.singlePost.map(({ name, no }) => (
+              <PopularPost
+                title={name}
+                id={Math.ceil(Math.random() * 4).toString()}
+              ></PopularPost>
+            ))
+          )}
+
           <h4 style={{ marginTop: "4vw" }}>
             <span
               style={{
@@ -217,21 +237,65 @@ export default function PostDetails() {
           </div>
         </div>
       </div>
-
-      <div className={Styles.fromSameAuthor}>
-        {sameAut.singlePost.map(
-          ({ id, name, description, pubDate, author }) => (
-            <SameAuthor
-              key={id}
-              date={pubDate}
-              author={author}
-              heading={name}
-              description={description}
-              post={Math.ceil(Math.random() * 3).toString()}
-            ></SameAuthor>
-          )
-        )}
+      <div
+        style={{
+          marginTop:
+            loadingCat === false && location.tags.length > 3
+              ? "15vw"
+              : loadingCat === false && location.tags.length < 3
+              ? "19vw"
+              : loadingCat === true && location.tags.length > 3
+              ? "1vw"
+              : "3vw",
+          fontSize: "2.3vw",
+          fontWeight: "bolder",
+          fontFamily: "'Quicksand', sans-serif",
+          marginBottom: "4vw",
+          marginLeft: "4vw",
+        }}
+      >
+        More From Author
       </div>
+
+      {loadingAut === false ? (
+        <div
+          style={{
+            marginTop: "3vw",
+            textAlign: "left",
+            fontSize: "1.5vw",
+            fontWeight: "medium",
+            marginBottom: "6vw",
+            marginLeft: "7vw",
+          }}
+        >
+          Loading&nbsp;&nbsp;&nbsp;
+          <span>
+            <Loader
+              type="Circles"
+              color="#00BFFF"
+              height={50}
+              width={70}
+              timeout={1000000} //1000 secs
+            />
+          </span>
+        </div>
+      ) : (
+        <div className={Styles.fromSameAuthor}>
+          {sameAut.singlePost.map(
+            ({ id, name, description, pubDate, author, no }) => (
+              <SameAuthor
+                key={id}
+                date={pubDate}
+                author={author}
+                heading={name}
+                description={description}
+                post={Math.ceil(Math.random() * 3).toString()}
+              ></SameAuthor>
+            )
+          )}
+        </div>
+      )}
+
       <UpvotePost />
       <Fotter />
     </div>

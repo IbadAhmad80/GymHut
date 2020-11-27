@@ -6,7 +6,7 @@
 
 .mainGrid {
   margin-top: 1vw;
-  margin-bottom: 3vw;
+  margin-bottom: 6vw;
   display: grid;
   grid-template-columns: 1fr;
   grid-template-rows: minmax(50px, 210px);

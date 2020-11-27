@@ -2,7 +2,6 @@ import React from "react";
 import { GoPerson } from "react-icons/go";
 import Styles from "./sameAuthor.module.css";
 import { useHistory } from "react-router-dom";
-import axios from "axios";
 export default function SameAuthor({ author, heading, post }) {
   const history = useHistory();
 

@@ -84,7 +84,7 @@ export default class Features extends React.Component {
             </h2>
 
             <SignInForm
-              type={"course"}
+              type={"course_1"}
               membership={"none"}
               payment={"non-set"}
               price={this.props.price}

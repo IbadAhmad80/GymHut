@@ -10,3 +10,9 @@ content-type: application/json
 // "phoneNumber":"921111111111",
 // "type":"Gold"
 }
+
+###
+GET http://localhost:3000/courses/popular
+content-type: application/json
+
+

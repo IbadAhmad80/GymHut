@@ -164,7 +164,7 @@ export default function SignInForm({
                   />
                   <div>
                     {" "}
-                    <br />
+                    {type === "course" ? console.log("") : <br />}
                     <br />
                     <ErrorMessage
                       name="email"
@@ -202,7 +202,7 @@ export default function SignInForm({
 
                   <div>
                     {" "}
-                    <br />
+                    {type === "course" ? console.log("") : <br />}
                     <br />
                     <ErrorMessage
                       name="password"

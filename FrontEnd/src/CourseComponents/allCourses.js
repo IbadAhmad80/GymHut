@@ -6,9 +6,13 @@ import Fotter from "../footer";
 import axios from "axios";
 import weight_lifting from "../assets/weight_lifting.jpg";
 import { useLocation } from "react-router-dom";
+import Loader from "react-loader-spinner";
+// importing all the css for loader
+import "react-loader-spinner/dist/loader/css/react-spinner-loader.css";
 
 export default function AllCourses() {
   const location = useLocation();
+  const [loading, isLoading] = useState(false);
   const [course, setCourse] = useState({ courses: [] });
 
   useEffect(() => {
@@ -18,6 +22,7 @@ export default function AllCourses() {
             .get("http://localhost:3000/courses")
             .then((response) => {
               setCourse({ courses: response.data });
+              isLoading(true);
             })
             .catch((error) => {
               console.log("error is :", error);
@@ -26,13 +31,51 @@ export default function AllCourses() {
             .get(`http://localhost:3000/courses/${location.category}`)
             .then((response) => {
               setCourse({ courses: response.data });
+              isLoading(true);
             })
             .catch((error) => {
               console.log("error is :", error);
             });
   }, []);
 
-  return (
+  return loading === false ? (
+    <div style={{ backgroundColor: " rgb(237, 237, 237)" }}>
+      <div
+        className={Styles.grid}
+        style={{ backgroundImage: `url(${weight_lifting})` }}
+      >
+        <NavBar />
+        <div className={Styles.mainGrid}>
+          <div style={{ gridRow: "1" }}></div>
+          <div className={Styles.boxContent}>
+            <h3 style={{ fontSize: "1.3vw", color: "maroon" }}>Our Courses</h3>
+            <h3>What we Offer</h3>
+          </div>
+        </div>
+      </div>
+      <div
+        style={{
+          marginTop: "3vw",
+          textAlign: "center",
+          fontSize: "2vw",
+          fontWeight: "bold",
+          marginBottom: "3vw",
+        }}
+      >
+        Loading&nbsp;&nbsp;&nbsp;
+        <span>
+          <Loader
+            type="ThreeDots"
+            color="#00BFFF"
+            height={100}
+            width={100}
+            timeout={1000000} //1000 secs
+          />
+        </span>
+      </div>
+      <Fotter />
+    </div>
+  ) : (
     <div>
       <div
         className={Styles.grid}
@@ -69,9 +112,10 @@ export default function AllCourses() {
             timings,
             category,
             hours,
+            no,
           }) => (
             <PopularCourses
-              no={Math.ceil(Math.random() * 4).toString()}
+              no={no}
               title={name}
               mentor={mentor}
               intensity={intensity}
@@ -88,6 +132,7 @@ export default function AllCourses() {
           )
         )}
       </div>
+
       <Fotter />
     </div>
   );

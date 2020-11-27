@@ -17,6 +17,19 @@ router.get("/", async (req, res) => {
   }
 });
 
+router.get("/popular", async (req, res) => {
+  try {
+    const posts = await Courses.find()
+      .sort({
+        students: -1,
+      })
+      .limit(3);
+    res.json(posts);
+  } catch (error) {
+    res.json({ message: error });
+  }
+});
+
 router.get("/:category", async (req, res) => {
   try {
     const courses = await Courses.find({ category: req.params.category });

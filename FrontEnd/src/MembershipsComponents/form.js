@@ -62,7 +62,7 @@ export default function MemberShipForm({ type, membership }) {
     fullName: Yup.string()
       .min(3, "Too Short!")
       .max(50, "Too Long!")
-      .required("First Name is required"),
+      .required("Name is required"),
 
     phoneNumber: Yup.string()
       .required("Phone number is required")
@@ -279,7 +279,7 @@ export default function MemberShipForm({ type, membership }) {
         }}
       </Formik>
       {type === "membership" ? (
-        <Features membership={membership} payment={"set"} />
+        <Features membership={membership} payment={"set"} hide={hide} />
       ) : (
         console.log("")
       )}

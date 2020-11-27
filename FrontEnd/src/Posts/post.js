@@ -5,8 +5,13 @@ import Styles from "./post.module.css";
 import SinglePost from "./singlePost";
 import axios from "axios";
 import { useLocation } from "react-router-dom";
+import Loader from "react-loader-spinner";
+// importing all the css for loader
+import "react-loader-spinner/dist/loader/css/react-spinner-loader.css";
+
 export default function Posts() {
   const location = useLocation();
+  const [loading, isLoading] = useState(false);
   const [posts, setPosts] = useState({ singlePost: [] });
   useEffect(() => {
     const a =
@@ -18,6 +23,7 @@ export default function Posts() {
           .get("http://localhost:3000/posts")
           .then((response) => {
             setPosts({ singlePost: response.data });
+            isLoading(true);
           })
           .catch((error) => {
             console.log("error is :", error);
@@ -28,6 +34,7 @@ export default function Posts() {
           .get(`http://localhost:3000/posts/tags/${location.tag}`)
           .then((response) => {
             setPosts({ singlePost: response.data });
+            isLoading(true);
           })
           .catch((error) => {
             console.log("error is :", error);
@@ -38,6 +45,7 @@ export default function Posts() {
           .get(`http://localhost:3000/posts/category/${location.category}`)
           .then((response) => {
             setPosts({ singlePost: response.data });
+            isLoading(true);
           })
           .catch((error) => {
             console.log("error is :", error);
@@ -48,6 +56,7 @@ export default function Posts() {
           .get(`http://localhost:3000/posts/findPost?findPost=${location.name}`)
           .then((response) => {
             setPosts({ singlePost: response.data });
+            isLoading(true);
           })
           .catch((error) => {
             console.log("error is :", error);
@@ -56,7 +65,41 @@ export default function Posts() {
         <div></div>
       );
   }, []);
-  return (
+  return loading === false ? (
+    <div style={{ backgroundColor: " rgb(237, 237, 237)" }}>
+      <div className={Styles.grid}>
+        <NavBar />
+        <div className={Styles.mainGrid}>
+          <div style={{ gridRow: "1" }}></div>
+          <div className={Styles.boxContent}>
+            <h3 style={{ fontSize: "1.3vw", color: "maroon" }}>Our Blogs</h3>
+            <h3>Blog Articles</h3>
+          </div>
+        </div>
+      </div>
+      <div
+        style={{
+          marginTop: "3vw",
+          textAlign: "center",
+          fontSize: "2vw",
+          fontWeight: "bold",
+          marginBottom: "3vw",
+        }}
+      >
+        Loading&nbsp;&nbsp;&nbsp;
+        <span>
+          <Loader
+            type="Bars"
+            color="#00BFFF"
+            height={100}
+            width={100}
+            timeout={1000000} //1000 secs
+          />
+        </span>
+      </div>
+      <Fotter />
+    </div>
+  ) : (
     <div style={{ backgroundColor: " rgb(237, 237, 237)" }}>
       <div className={Styles.grid}>
         <NavBar />
@@ -70,14 +113,14 @@ export default function Posts() {
       </div>
       <div className={Styles.posts}>
         {posts.singlePost.map(
-          ({ id, name, description, pubDate, author, tags, category }) => (
+          ({ id, name, description, pubDate, author, tags, category, no }) => (
             <SinglePost
               key={id}
               date={pubDate}
               author={author}
               heading={name}
               description={description}
-              post={Math.ceil(Math.random() * 10).toString()}
+              post={no}
               tags={tags}
               category={category}
             ></SinglePost>

@@ -5,6 +5,7 @@ const body_parser = require("body-parser");
 const Posts = require("./Routes/postRoutes");
 const Members = require("./Routes/membershipRoutes");
 const Courses = require("./Routes/coursesRoutes");
+const Queries = require("./Routes/contactRoutes");
 const cors = require("cors");
 
 //parsing the post request for all the routes
@@ -31,7 +32,10 @@ app.use("/members", Members);
 //middleware for all the courses route
 app.use("/courses", Courses);
 
+//middleware for all the contact route
+app.use("/contact", Queries);
+
 //listning to the port
 app.listen(3000, () => {
-  console.log("listening to the port 3000");
+  console.log("listning to the port 3000");
 });
