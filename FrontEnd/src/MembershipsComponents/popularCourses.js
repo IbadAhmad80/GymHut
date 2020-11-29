@@ -38,13 +38,13 @@ export default function PopularCourses({
               : no === "1"
               ? { backgroundImage: `url(${sports_4})` }
               : no == "3"
-              ? { backgroundImage: `url(${sport_3})` }
+              ? { backgroundImage: `url(${people_4})` }
               : no == "4"
               ? { backgroundImage: `url(${people_2})` }
               : no == "5"
               ? { backgroundImage: `url(${adult})` }
               : no == "6"
-              ? { backgroundImage: `url(${people_4})` }
+              ? { backgroundImage: `url(${sport_3})` }
               : no == "7"
               ? { backgroundImage: `url(${cycling})` }
               : no == "8"

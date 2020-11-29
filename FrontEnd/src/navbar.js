@@ -4,10 +4,14 @@ import { GiMuscleUp } from "react-icons/gi";
 import Styles from "./navbar.module.css";
 import { useHistory } from "react-router-dom";
 import { RiMenuAddFill } from "react-icons/ri";
+import { useSelector, useDispatch } from "react-redux";
+import { logOut } from "./SignUpComponents/actions";
 
 export default function NavBar() {
   const history = useHistory();
+  const dispatch = useDispatch();
   const [scrolled, setscrolled] = useState(false);
+  const userName = useSelector((state) => state.userName);
 
   const changeBackground = () => {
     if (window.scrollY >= 80) {
@@ -17,6 +21,37 @@ export default function NavBar() {
   window.addEventListener("scroll", changeBackground);
   return (
     <div>
+      <div
+        style={{
+          display: "flex",
+          backgroundColor: "white",
+          alignItems: "center",
+          width: "100vw",
+          justifyContent: "center",
+        }}
+      >
+        {userName === "" ? (
+          <div
+            className={Styles.login}
+            onClick={() =>
+              history.push({
+                pathname: "./signUp",
+                type: "signup",
+                recentPage: window.location.pathname,
+              })
+            }
+          >
+            Login
+          </div>
+        ) : (
+          <div className={Styles.userName}>{userName}</div>
+        )}
+
+        <div className={Styles.logout} onClick={() => dispatch(logOut())}>
+          Logout
+        </div>
+      </div>
+
       <div className={scrolled ? Styles.navBarScrolled : Styles.navBar}>
         <div className={Styles.flexStart}>
           <div style={{ display: "flex" }}>

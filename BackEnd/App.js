@@ -16,7 +16,7 @@ app.use(cors());
 
 //Connecting to the database
 mongoose.connect(
-  "mongodb+srv://ibad:flourida123@cluster0.02mci.mongodb.net/GymHut?retryWrites=true&w=majority",
+  process.env.MONGODB_PASS,
   { useNewUrlParser: true, useUnifiedTopology: true },
   () => {
     console.log("Up and running with mongoDB");

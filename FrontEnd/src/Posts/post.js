@@ -14,7 +14,7 @@ export default function Posts() {
   const [loading, isLoading] = useState(false);
   const [posts, setPosts] = useState({ singlePost: [] });
   useEffect(() => {
-    const a =
+    let data =
       location.category === undefined &&
       location.author === undefined &&
       location.tag === undefined &&
@@ -91,8 +91,8 @@ export default function Posts() {
           <Loader
             type="Bars"
             color="#00BFFF"
-            height={100}
-            width={100}
+            height={50}
+            width={70}
             timeout={1000000} //1000 secs
           />
         </span>

@@ -8,6 +8,7 @@ import CoursDetails from "./CourseComponents/courses";
 import AllCourses from "./CourseComponents/allCourses";
 import Post from "./Posts/post";
 import PostDetails from "./Posts/postDetails";
+import SignIn from "./SignUpComponents/Signin";
 export default class App extends Component {
   render() {
     return (
@@ -28,6 +29,8 @@ export default class App extends Component {
           <Route path="/courseDetails" component={CoursDetails} />
           <Route path="/blogs" component={Post} />
           <Route path="/blogDetails" component={PostDetails} />
+          <Route path="/signUp" component={SignIn} />
+          <Route path="/signIn" component={SignIn} />
         </Switch>
       </div>
     );
