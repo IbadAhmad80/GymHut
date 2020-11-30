@@ -28,6 +28,7 @@ export default function SignInForm({
 
   const [membershipValue, setMembershipValue] = useState("");
   const [state, setState] = useState({ visible: false });
+  // console.log(`membership in courses form : ${membership}`);
 
   const show = () => {
     setState({ visible: true });
@@ -127,7 +128,7 @@ export default function SignInForm({
                 type: "success",
               });
               setStripe(false);
-              setMembershipValue(response.data[0].type);
+              setMembershipValue(response.data.type);
             })
             .catch((error) => {
               if (error.response) {
@@ -286,13 +287,13 @@ export default function SignInForm({
                 : membership === "Pro"
                 ? 25 * 100
                 : 39 * 100
-              : membershipValue === "none"
-              ? price
+              : membershipValue === "Gold"
+              ? price * 25
               : membershipValue === "Standard"
               ? price * 75
               : membershipValue === "Pro"
               ? price * 50
-              : price * 25
+              : price
           }
         >
           <button

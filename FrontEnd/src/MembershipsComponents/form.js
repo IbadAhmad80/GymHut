@@ -17,12 +17,10 @@ export default function MemberShipForm({ type, membership }) {
   const [state, setState] = useState({ visible: false });
 
   const show = () => {
-    console.log("in show method");
     setState({ visible: true });
   };
 
   const hide = () => {
-    console.log("in hide method");
     setState({ visible: false });
   };
   const initialValues = {

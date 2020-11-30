@@ -39,8 +39,16 @@ const Sidebar = () => {
           type: "success",
         });
         console.log("Response from server :", response);
-        dispatch(signIn(response.data.accessToken, response.data.userName));
-        history.push(location.recentPage);
+        dispatch(
+          signIn(
+            response.data.accessToken,
+            response.data.userName,
+            response.data.userId
+          )
+        );
+        location.recentPage === "/courseDetails"
+          ? history.push("courses")
+          : history.push(location.recentPage);
       })
       .catch((error) => {
         console.log(`error in   : ${error}`);
@@ -59,17 +67,17 @@ const Sidebar = () => {
           type: "success",
         });
         console.log("Response from server :", response);
-        dispatch(logIn(response.data.accessToken, response.data.user));
-        history.push(location.recentPage);
-        //   axios
-        //     .get("http://localhost:3000/members/authorize", {
-        //       headers: {
-        //         Authorization: `Bearer ${response.data.accessToken}`,
-        //       },
-        //     })
-        //     .then((response) => {
-        //       console.log("Id name:", response.data);
-        //     });
+        dispatch(
+          logIn(
+            response.data.accessToken,
+            response.data.user,
+            response.data.userId
+          )
+        );
+        location.recentPage === "/courseDetails"
+          ? history.push("courses")
+          : history.push(location.recentPage);
+
         //   history.push(location.recentPage);
       })
       .catch((error) => {
@@ -124,7 +132,7 @@ const Sidebar = () => {
           Service
         </Terms>
         <h4>
-          Already have an account?{" "}
+          Already have an account ?{" "}
           <span
             onClick={() =>
               history.push({
@@ -174,7 +182,7 @@ const Sidebar = () => {
           Service
         </Terms>
         <h4>
-          Dosn't have an account yet?{"  "}
+          Dosn't have an account yet ?{"  "}
           <span
             onClick={() =>
               history.push({
@@ -196,7 +204,7 @@ const Terms = styled.p`
   padding: 0 1rem;
   text-align: center;
   font-size: 12px;
-  color: gray;
+  color: white;
   font-weight: 300;
 
   font-family: "Montserrat", sans-serif;
@@ -208,17 +216,20 @@ const Form = styled.form`
   flex-direction: column;
   align-items: center;
   h3 {
-    color: #666666;
+    color: black;
     margin-bottom: 2rem;
+    font-weight: bold;
+    font-size: 26px;
   }
 
   button {
-    width: 75%;
+    width: 70%;
     max-width: 350px;
     min-width: 250px;
     height: 40px;
     border: none;
     margin: 1rem 0;
+    margin-left: -2vw;
     box-shadow: 0px 14px 9px -15px rgba(0, 0, 0, 0.25);
     border-radius: 8px;
     background-image: linear-gradient(tomato, orange);
@@ -239,22 +250,22 @@ const LogoWrapper = styled.div`
   }
 
   h3 {
-    color: #ff8d8d;
+    color: black;
     text-align: center;
-    font-size: 22px;
+    font-size: 24px;
   }
 
   span {
-    color: #5dc399;
+    color: maroon;
     font-weight: 300;
-    font-size: 18px;
+    font-size: 24px;
   }
 `;
 
 const Container = styled.div`
   min-width: 400px;
 
-  background-color: rgba(255, 255, 255, 0.8);
+  background-color: rgba(102, 102, 102, 0.8);
   height: 100%;
   display: flex;
   flex-direction: column;

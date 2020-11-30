@@ -7,6 +7,7 @@ import axios from "axios";
 import weight_lifting from "../assets/weight_lifting.jpg";
 import { useLocation } from "react-router-dom";
 import Loader from "react-loader-spinner";
+import { useSelector } from "react-redux";
 // importing all the css for loader
 import "react-loader-spinner/dist/loader/css/react-spinner-loader.css";
 

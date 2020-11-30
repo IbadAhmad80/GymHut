@@ -44,6 +44,7 @@ router.post("/enrollment", async (req, res) => {
   let status;
   try {
     const { course, coursePrice, token } = req.body;
+    // console.log(`${course} \n ${coursePrice} \n ${token}`);
     const member = await Members.find({
       email: token.email.toLowerCase(),
       enrolled_in: course,

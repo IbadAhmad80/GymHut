@@ -37,7 +37,12 @@ router.post("/signIn", async (req, res) => {
         const user = { name: req.body.email.toLowerCase() };
         const accessToken = jwt.sign(user, process.env.ACCESS_TOKEN_SECRET);
         token = accessToken;
-        const response = { accessToken: accessToken, user: members.name };
+        const response = {
+          accessToken: accessToken,
+          user: members.name,
+          userId: req.body.email.toLowerCase(),
+          type: members.type,
+        };
         res.json(response);
       } else {
         res.status(401).send("No account of this data exist ");
@@ -63,6 +68,18 @@ router.get("/authorize", (req, res) => {
     }
   });
 });
+
+router.get("/membershipStatus/:id", async (req, res) => {
+  try {
+    console.log(`membership status " ${req.params.id}`);
+    const member = await Members.find({ email: req.params.id });
+    console.log("membership type :", member);
+    res.json({ id: member[0].type });
+  } catch (error) {
+    res.json({ message: error });
+  }
+});
+
 router.post("/", async (req, res) => {
   try {
     // console.log(`Data of New Member : ${req.body.fullName}`);
@@ -90,6 +107,7 @@ router.post("/", async (req, res) => {
             const response = {
               accessToken: accessToken,
               userName: req.body.fullName,
+              userId: req.body.email.toLowerCase(),
             };
             res.json(response);
           })
@@ -108,11 +126,11 @@ router.post("/payment", async (req, res) => {
   let status;
   try {
     const { membership, token } = req.body;
-    console.log("membership we got : ", membership);
-    console.log("email we got :", token.email);
+    // console.log("membership we got : ", membership);
+    // console.log("email we got :", token.email);
     const member = await Members.find(
       {
-        type: "",
+        type: "none",
         email: token.email,
       },
       (error, msg) => {
@@ -120,6 +138,7 @@ router.post("/payment", async (req, res) => {
         else console.log("null ");
       }
     );
+    // console.log("member", member);
     if (Object.entries(member).length === 0) {
       console.log("Already a member");
       res.status(403).send("You are already a Member");

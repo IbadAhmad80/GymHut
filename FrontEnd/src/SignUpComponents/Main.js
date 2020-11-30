@@ -2,18 +2,12 @@ import React from "react";
 import styled from "styled-components";
 
 const Main = () => {
-  return (
-    <Container>
-      <h1>
-        Join The Team of Top Class <br /> Mentors and Fitness Guro's
-      </h1>
-    </Container>
-  );
+  return <Container></Container>;
 };
 
 const Container = styled.div`
   width: 100%;
-  height: 100%;
+  height: 80%;
   display: flex;
   justify-content: center;
   margin-top: 15vh;

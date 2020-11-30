@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState, useEffect } from "react";
 import Styles from "./courseFeatures.module.css";
 import Rodal from "rodal";
 import SignInForm from "./form";
@@ -6,68 +6,129 @@ import Styles_1 from "../MembershipsComponents/form.module.css";
 // include styles
 import "rodal/lib/rodal.css";
 import "./modalStyles.css";
+import { useSelector } from "react-redux";
+import StripeCheckout from "react-stripe-checkout";
+import { toast } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
+import axios from "axios";
 
-export default class Features extends React.Component {
-  constructor(props) {
-    super(props);
-    this.state = { visible: false };
-  }
+export default function Features({
+  name,
+  category,
+  price,
+  duration,
+  students,
+  shift,
+  payment,
+  membership,
+}) {
+  const [coursePrice, setCoursePrice] = useState();
+  const [state, setState] = useState({ visible: false });
 
-  show() {
-    this.setState({ visible: true });
-  }
+  const userName = useSelector((state) => state.userName);
+  const userId = useSelector((state) => state.userId);
+  const accessToken = useSelector((state) => state.accessToken);
 
-  hide() {
-    this.setState({ visible: false });
-  }
+  const show = () => {
+    setState({ visible: true });
+  };
 
-  render() {
-    if (this.props.payment !== "set") {
+  useEffect(() => {
+    console.log("access token :", accessToken);
+    axios
+      .get("http://localhost:3000/members/authorize", {
+        headers: {
+          Authorization: `Bearer ${accessToken}`,
+        },
+      })
+      .then((response) => {
+        console.log("Id name:", response.data.id);
+        axios
+          .get(
+            `http://localhost:3000/members/membershipStatus/${response.data.id}`
+          )
+          .then((response) => {
+            // console.log("Memberhsip type :", response.data.id);
+            response.data.id === "Standard"
+              ? setCoursePrice(price * 75)
+              : response.data.id === "Pro"
+              ? setCoursePrice(price * 50)
+              : response.data.id === "Gold"
+              ? setCoursePrice(price * 25)
+              : setCoursePrice(price * 100);
+          });
+      });
+  }, []);
+
+  const hide = () => {
+    setState({ visible: false });
+  };
+
+  const handleStripe = (token, _) => {
+    console.log(token);
+    axios
+      .post("http://localhost:3000/courses/enrollment", {
+        course: name,
+        coursePrice,
+        token,
+      })
+      .then((response) => {
+        console.log("Response:", response.data);
+        const { status } = response.data;
+
+        if (status === "success") {
+          toast(`Success! Enrolled in ${name}`, { type: "info" });
+        }
+      })
+      .catch((error) => {
+        if (error.response) {
+          toast(`${error.response.data}`, { type: "error" });
+        }
+      });
+  };
+  if (userId === "" || userName === "") {
+    if (payment !== "set") {
       return (
         <div>
           <h3 className={Styles.featureHeading}>Class Features</h3>
           <h3 className={Styles.categoryHeading}>
             Category:
             <span style={{ paddingLeft: "2vw", color: "rgb(134, 128, 128)" }}>
-              {this.props.category}
+              {category}
             </span>
           </h3>
           <h3 className={Styles.durationHeading}>
             Duration:
             <span style={{ paddingLeft: "2vw", color: "rgb(134, 128, 128)" }}>
-              {this.props.duration} days
+              {duration} days
             </span>
           </h3>
           <h3 className={Styles.studentsHeading}>
             Students:
             <span style={{ paddingLeft: "3vw", color: "rgb(134, 128, 128)" }}>
-              {this.props.students}
+              {students}
             </span>
           </h3>
           <h3 className={Styles.shiftHeading}>
             Shift:
             <span style={{ paddingLeft: "4vw", color: "rgb(134, 128, 128)" }}>
-              {this.props.shift}
+              {shift}
             </span>
           </h3>
           <h3 className={Styles.priceHeading}>
             Price:
             <span style={{ paddingLeft: "4vw", color: "rgb(134, 128, 128)" }}>
-              {this.props.price} $
+              {price} $
             </span>
           </h3>
-          <button
-            className={Styles.joinNow}
-            type="button"
-            onClick={this.show.bind(this)}
-          >
+          <button className={Styles.joinNow} type="button" onClick={show}>
             Join Now
           </button>
           <Rodal
             height={340}
             width={450}
-            visible={this.state.visible}
-            onClose={this.hide.bind(this)}
+            visible={state.visible}
+            onClose={hide}
             enterAnimation={"flip"}
             duration={500}
             leaveAnimation={"slideUp"}
@@ -87,8 +148,8 @@ export default class Features extends React.Component {
               type={"course_1"}
               membership={"none"}
               payment={"non-set"}
-              price={this.props.price}
-              course={this.props.name}
+              price={price}
+              course={name}
             />
           </Rodal>
         </div>
@@ -103,7 +164,7 @@ export default class Features extends React.Component {
               float: "right",
             }}
             className={Styles_1.not_member}
-            onClick={this.show.bind(this)}
+            onClick={show}
             type="button"
           >
             Already a User?
@@ -111,8 +172,8 @@ export default class Features extends React.Component {
           <Rodal
             height={350}
             width={550}
-            visible={this.state.visible}
-            onClose={this.hide.bind(this)}
+            visible={state.visible}
+            onClose={hide}
             enterAnimation={"flip"}
             duration={500}
             leaveAnimation={"slideUp"}
@@ -129,14 +190,60 @@ export default class Features extends React.Component {
             </h2>
             <SignInForm
               type={"course"}
-              membership={this.props.membership}
+              membership={membership}
               payment={"set"}
-              price={this.props.price}
-              course={this.props.name}
+              price={price}
+              course={name}
             />
           </Rodal>
         </div>
       );
     }
+  } else {
+    return (
+      <div>
+        <h3 className={Styles.featureHeading}>Class Features</h3>
+        <h3 className={Styles.categoryHeading}>
+          Category:
+          <span style={{ paddingLeft: "2vw", color: "rgb(134, 128, 128)" }}>
+            {category}
+          </span>
+        </h3>
+        <h3 className={Styles.durationHeading}>
+          Duration:
+          <span style={{ paddingLeft: "2vw", color: "rgb(134, 128, 128)" }}>
+            {duration} days
+          </span>
+        </h3>
+        <h3 className={Styles.studentsHeading}>
+          Students:
+          <span style={{ paddingLeft: "3vw", color: "rgb(134, 128, 128)" }}>
+            {students}
+          </span>
+        </h3>
+        <h3 className={Styles.shiftHeading}>
+          Shift:
+          <span style={{ paddingLeft: "4vw", color: "rgb(134, 128, 128)" }}>
+            {shift}
+          </span>
+        </h3>
+        <h3 className={Styles.priceHeading}>
+          Price:
+          <span style={{ paddingLeft: "4vw", color: "rgb(134, 128, 128)" }}>
+            {price} $
+          </span>
+        </h3>
+        <StripeCheckout
+          stripeKey="pk_test_51HndUcEynMwgZp7ZbDkkWsib4j8KiQJSN1m0B5GyvLpbNBmKflvbEBOJvTkAOMrF8HVWttyYeg0h6cO4WgvPbgpv00bxeRO8cs"
+          token={handleStripe}
+          name={"Payment SetUp"}
+          amount={coursePrice}
+        >
+          <button type="submit" className={Styles.joinNow}>
+            Join Now
+          </button>
+        </StripeCheckout>
+      </div>
+    );
   }
 }

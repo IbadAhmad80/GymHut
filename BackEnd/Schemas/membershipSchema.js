@@ -24,7 +24,7 @@ const membersSchema = mongoose.Schema({
   type: {
     type: String,
     required: false,
-    default: "",
+    default: "none",
   },
   startingDate: {
     type: Date,

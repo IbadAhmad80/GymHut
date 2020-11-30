@@ -15,7 +15,49 @@
   margin-bottom: 5vw;
   font-family: "Peddana", serif;
 }
+.stripe_button_1 {
+  margin-top: 2vw;
+  background-image: white;
+  color: black;
+  border: 1px solid black;
+  padding-top: 1.3vw;
+  padding-bottom: 1.3vw;
+  padding-left: 2.5vw;
+  padding-right: 2.5vw;
+  margin-left: 8vw;
+  margin-bottom: 2vw;
+  transition-property: font-size;
+  transition-duration: 0.3s;
+  text-align: center;
+  text-transform: uppercase;
+}
 
+.stripe_button_2 {
+  margin-top: 2vw;
+  background-image: linear-gradient(tomato, orange);
+  color: black;
+  border: 1px solid black;
+  padding-top: 1.3vw;
+  padding-bottom: 1.3vw;
+  padding-left: 2.5vw;
+  padding-right: 2.5vw;
+  transition-property: font-size;
+  transition-duration: 0.3s;
+  margin-left: 8vw;
+  margin-bottom: 2vw;
+  text-align: center;
+  color: white;
+  text-transform: uppercase;
+  border: none;
+}
+
+.stripe_button_1:hover {
+  font-size: 1.1vw;
+}
+
+.stripe_button_2:hover {
+  font-size: 1.1vw;
+}
 .membership_1 {
   margin-top: 1vw;
   grid-column: 1;

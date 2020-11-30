@@ -1,6 +1,8 @@
 import React from "react";
 import styled from "styled-components";
-import bgImg from "../assets/bg.png";
+// import bgImg from "../assets/bg.png";
+import lake from "../assets/lake.jpg";
+import dumbbell from "../assets/dumbbell.jpg";
 import Sidebar from "./Sidebar";
 import Main from "./Main";
 
@@ -24,7 +26,7 @@ const Container = styled.div`
   right: 0;
 `;
 const Wrapper = styled.div`
-  background-image: url(${bgImg});
+  background-image: url(${lake});
   background-position: center;
   background-size: cover;
   background-repeat: no-repeat;

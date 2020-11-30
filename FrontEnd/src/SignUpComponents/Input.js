@@ -17,7 +17,6 @@ const Input = ({ type, placeholder, value, onChange }) => {
   );
 };
 
-
 const StyledInput = styled.input`
   width: 80%;
   max-width: 350px;
@@ -53,10 +52,10 @@ const Status = styled.div`
     background: #ffa689;
   }
   ${StyledInput}:invalid + & {
-    background: #fe2f75;
+    background: maroon;
   }
   ${StyledInput}:valid + & {
-    background: #70edb9;
+    background: green;
   }
 `;
 
