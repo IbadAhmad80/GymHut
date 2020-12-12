@@ -15,6 +15,7 @@ export default function AllCourses() {
   const location = useLocation();
   const [loading, isLoading] = useState(false);
   const [course, setCourse] = useState({ courses: [] });
+  const [load, setLoad] = useState(true);
 
   useEffect(() => {
     const type =
@@ -39,6 +40,19 @@ export default function AllCourses() {
             });
   }, []);
 
+  const setAllCourses = () => {
+    axios
+      .get(`http://localhost:3000/courses/AllCourses`)
+      .then((response) => {
+        setCourse({ courses: response.data });
+
+        setLoad(false);
+      })
+      .catch((error) => {
+        console.log("error is :", error);
+      });
+  };
+
   return loading === false ? (
     <div style={{ backgroundColor: " rgb(237, 237, 237)" }}>
       <div
@@ -49,8 +63,18 @@ export default function AllCourses() {
         <div className={Styles.mainGrid}>
           <div style={{ gridRow: "1" }}></div>
           <div className={Styles.boxContent}>
-            <h3 style={{ fontSize: "1.3vw", color: "maroon" }}>Our Courses</h3>
-            <h3>What we Offer</h3>
+            <h3
+              style={{
+                fontSize: "1.3vw",
+                color: "maroon",
+                fontFamily: '"Oswald", sans-serif',
+              }}
+            >
+              Our Courses
+            </h3>
+            <h3 style={{ fontFamily: '"Oswald", sans-serif' }}>
+              What we Offer
+            </h3>
           </div>
         </div>
       </div>
@@ -66,6 +90,7 @@ export default function AllCourses() {
         Loading&nbsp;&nbsp;&nbsp;
         <span>
           <Loader
+            style={{ marginTop: "1vw" }}
             type="ThreeDots"
             color="#00BFFF"
             height={100}
@@ -86,8 +111,18 @@ export default function AllCourses() {
         <div className={Styles.mainGrid}>
           <div style={{ gridRow: "1" }}></div>
           <div className={Styles.boxContent}>
-            <h3 style={{ fontSize: "1.3vw", color: "maroon" }}>Our Courses</h3>
-            <h3>What we Offer</h3>
+            <h3
+              style={{
+                fontSize: "1.3vw",
+                color: "maroon",
+                fontFamily: '"Oswald", sans-serif',
+              }}
+            >
+              Our Courses
+            </h3>
+            <h3 style={{ fontFamily: '"Oswald", sans-serif' }}>
+              What we Offer
+            </h3>
           </div>
         </div>
       </div>
@@ -133,6 +168,18 @@ export default function AllCourses() {
           )
         )}
       </div>
+      {load === true && location.cat === undefined ? (
+        <button
+          type="button"
+          style={{ marginLeft: "45vw", marginBottom: "4vw" }}
+          className={Styles.loadMore}
+          onClick={setAllCourses}
+        >
+          Load More{" "}
+        </button>
+      ) : (
+        console.log("")
+      )}
 
       <Fotter />
     </div>

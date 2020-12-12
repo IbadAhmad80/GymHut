@@ -4,7 +4,7 @@ import Styles from "./courseTiming.module.css";
 
 export default function CourseTiming({ day, time }) {
   return (
-    <div>
+    <div style={{ marginBottom: "3vw" }}>
       <div style={{ padding: "1.5vw", backgroundColor: "rgb(200, 200, 200)" }}>
         <div style={{ display: "flex", marginTop: "1vw" }}>
           <h1 className={Styles.logo}>

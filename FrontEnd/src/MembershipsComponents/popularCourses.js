@@ -49,6 +49,8 @@ export default function PopularCourses({
               ? { backgroundImage: `url(${cycling})` }
               : no == "8"
               ? { backgroundImage: `url(${pearl_harbor})` }
+              : no === "10"
+              ? { backgroundImage: `url(${sports_4})` }
               : { backgroundImage: `url(${yoga})` }
           }
         />

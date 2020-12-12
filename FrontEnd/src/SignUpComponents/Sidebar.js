@@ -13,7 +13,6 @@ import { signIn, logIn } from "./actions";
 const Sidebar = () => {
   const location = useLocation();
   const dispatch = useDispatch();
-  console.log("recent page", location.recentPage);
   const history = useHistory();
 
   const [data, setData] = useState({
@@ -194,6 +193,23 @@ const Sidebar = () => {
           >
             Sign Up
           </span>
+          <h3
+            style={{
+              textAlign: "center",
+              color: "white",
+              marginTop: "1.5vw",
+              fontWeight: "lighter",
+              cursor: "pointer",
+              textDecoration: "underline",
+            }}
+            onClick={() =>
+              history.push({
+                pathname: "./",
+              })
+            }
+          >
+            Back to homepage{" "}
+          </h3>
         </h4>
       </div>
     </Container>

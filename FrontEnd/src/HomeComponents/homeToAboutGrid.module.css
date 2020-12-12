@@ -1,3 +1,5 @@
+@import url("https://fonts.googleapis.com/css2?family=Langar&display=swap");
+
 * {
   padding: 0;
   margin: 0;
@@ -26,10 +28,9 @@
   border-radius: 1%;
 }
 
-.topContentGrid {
+.topContent {
   margin-top: -2vw;
   grid-column: 2;
-  font-family: "Anton", sans-serif;
   text-transform: uppercase;
   font-weight: lighter;
   grid-row: 1;

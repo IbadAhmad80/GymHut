@@ -8,14 +8,26 @@ export default function HomeToAbout() {
     <div>
       <div className={Styles.mainGrid}>
         <div className={Styles.picGrid}></div>
-        <div className={Styles.topContentGrid}>
-          <div>WE’VE SKILL IN </div>
-          <div>
-            WIDE <span style={{ color: "tomato" }}>RANGE OF FITNESS</span> AND
-            OTHER
+        <div
+          style={{ fontFamily: '"Anton", sans-serif' }}
+          className={Styles.topContent}
+        >
+          <div style={{ fontFamily: '"Anton", sans-serif' }}>
+            WE’VE SKILL IN{" "}
+          </div>
+          <div style={{ fontFamily: '"Anton", sans-serif' }}>
+            WIDE{" "}
+            <span
+              style={{ color: "tomato", fontFamily: '"Anton", sans-serif' }}
+            >
+              RANGE OF FITNESS
+            </span>{" "}
+            AND OTHER
           </div>
 
-          <div>BODY HEALTH FACILITY.</div>
+          <div style={{ fontFamily: '"Anton", sans-serif' }}>
+            BODY HEALTH FACILITY.
+          </div>
         </div>
         <div className={Styles.bottomContentGrid}>
           Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Aenean

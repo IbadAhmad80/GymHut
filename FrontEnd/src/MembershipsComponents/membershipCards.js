@@ -36,8 +36,8 @@ export default function MembersgipCards({
 }) {
   const [state, setState] = useState({ visible: false });
 
-  const userName = useSelector((state) => state.userName);
-  const userId = useSelector((state) => state.userId);
+  const userName = useSelector((state) => state.account.userName);
+  const userId = useSelector((state) => state.account.userId);
 
   const show = () => {
     setState({ visible: true });

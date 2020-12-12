@@ -1,11 +1,12 @@
 import React from "react";
 import Styles from "./trainers.module.css";
-import { FaFacebookF } from "react-icons/fa";
+import { FaFacebookF, FaLinkedin } from "react-icons/fa";
 import { GrTwitter } from "react-icons/gr";
-import { IoLogoGoogleplus } from "react-icons/io";
+import { useHistory } from "react-router-dom";
 
 export default function Trainers({ man, name, job, content }) {
   // const Background = { backgroundImage: "url(" + man + ")" };
+  const history = useHistory();
   return (
     <div>
       <div className={Styles.mainGrid}>
@@ -17,9 +18,19 @@ export default function Trainers({ man, name, job, content }) {
         <div className={Styles.job}>{job}</div>
         <div className={Styles.content}>{content}</div>
         <div className={Styles.logos}>
-          <FaFacebookF className={Styles.social_logo} />
-          <GrTwitter className={Styles.social_logo} />
-          <IoLogoGoogleplus className={Styles.social_logo} />
+          <a
+            href="https://www.facebook.com/home.php?ref=wizard"
+            target="_blank"
+          >
+            <FaFacebookF className={Styles.social_logo} />
+          </a>
+
+          <a href="https://mobile.twitter.com/login" target="_blank">
+            <GrTwitter className={Styles.social_logo} />
+          </a>
+          <a href="https://www.linkedin.com/login/" target="_blank">
+            <FaLinkedin className={Styles.social_logo} />
+          </a>
         </div>
       </div>
     </div>

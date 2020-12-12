@@ -4,8 +4,8 @@ import {
   FaTwitterSquare,
   FaPinterestSquare,
   FaLinkedin,
-  FaGoogle,
 } from "react-icons/fa";
+import { AiFillInstagram } from "react-icons/ai";
 
 export default function SocialLogos() {
   return (
@@ -36,7 +36,7 @@ export default function SocialLogos() {
           fontSize: "1.5vw",
         }}
       >
-        <div
+        <a
           style={{
             paddingLeft: "0.6vw",
             paddingRight: "0.6vw",
@@ -44,10 +44,12 @@ export default function SocialLogos() {
             paddingBottom: "0.4vw",
             backgroundColor: "white",
           }}
+          href="https://www.facebook.com/home.php?ref=wizard"
+          target="_blank"
         >
           <FaFacebookSquare />
-        </div>
-        <div
+        </a>
+        <a
           style={{
             paddingLeft: "0.6vw",
             paddingRight: "0.6vw",
@@ -55,10 +57,12 @@ export default function SocialLogos() {
             paddingBottom: "0.4vw",
             backgroundColor: "white",
           }}
+          href="https://mobile.twitter.com/login"
+          target="_blank"
         >
           <FaTwitterSquare />
-        </div>
-        <div
+        </a>
+        <a
           style={{
             paddingLeft: "0.6vw",
             paddingRight: "0.6vw",
@@ -66,11 +70,13 @@ export default function SocialLogos() {
             paddingBottom: "0.4vw",
             backgroundColor: "white",
           }}
+          href="https://www.pinterest.com/login/"
+          target="_blank"
         >
           {" "}
           <FaPinterestSquare />
-        </div>
-        <div
+        </a>
+        <a
           style={{
             paddingLeft: "0.6vw",
             paddingRight: "0.6vw",
@@ -78,10 +84,12 @@ export default function SocialLogos() {
             paddingBottom: "0.4vw",
             backgroundColor: "white",
           }}
+          href="https://www.linkedin.com/login/"
+          target="_blank"
         >
           <FaLinkedin />
-        </div>
-        <div
+        </a>
+        <a
           style={{
             paddingLeft: "0.6vw",
             paddingRight: "0.6vw",
@@ -89,9 +97,11 @@ export default function SocialLogos() {
             paddingBottom: "0.4vw",
             backgroundColor: "white",
           }}
+          href="https://www.instagram.com/accounts/login/"
+          target="_blank"
         >
-          <FaGoogle />
-        </div>
+          <AiFillInstagram />
+        </a>
       </div>
     </div>
   );

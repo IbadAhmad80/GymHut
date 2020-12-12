@@ -19,15 +19,15 @@
   justify-self: center;
   color: white;
   font-size: 5vw;
-  animation-name: zoom;
+  /* animation-name: zoom;
   animation-fill-mode: forwards;
   animation-iteration-count: infinite;
   animation-timing-function: ease-out;
   animation-duration: 0.7s;
-  animation-delay: 0.2s;
+  animation-delay: 0.2s; */
 }
 
-@keyframes zoom {
+/* @keyframes zoom {
   0% {
     font-size: 1vw;
   }
@@ -46,7 +46,7 @@
   100% {
     font-size: 6vw;
   }
-}
+} */
 .heading {
   margin-top: 1vw;
   grid-row: 3;

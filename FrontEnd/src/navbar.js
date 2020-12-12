@@ -3,16 +3,16 @@ import { FiPhoneCall } from "react-icons/fi";
 import { GiMuscleUp } from "react-icons/gi";
 import Styles from "./navbar.module.css";
 import { useHistory } from "react-router-dom";
-import { RiMenuAddFill } from "react-icons/ri";
 import { useSelector, useDispatch } from "react-redux";
 import { logOut } from "./SignUpComponents/actions";
 import { CgProfile } from "react-icons/cg";
 
-export default function NavBar() {
+export default function NavBar({ type }) {
   const history = useHistory();
   const dispatch = useDispatch();
   const [scrolled, setscrolled] = useState(false);
-  const userName = useSelector((state) => state.userName);
+  const [isClick, setIsClick] = useState(false);
+  const userName = useSelector((state) => state.account.userName);
 
   const changeBackground = () => {
     if (window.scrollY >= 40) {
@@ -36,12 +36,20 @@ export default function NavBar() {
         </div>
         <div className={Styles.tel_phone}>+ 92 - 34563 - 45</div>
 
-        <div className={Styles.logout} onClick={() => dispatch(logOut())}>
-          Logout
-        </div>
+        <button className={Styles.logout} onClick={() => dispatch(logOut())}>
+          {userName === "" ? "" : "Logout"}
+        </button>
       </div>
 
-      <div className={scrolled ? Styles.navBarScrolled : Styles.navBar}>
+      <div
+        className={
+          scrolled && type !== "product"
+            ? Styles.navBarScrolled
+            : type === "product"
+            ? Styles.prodNav
+            : Styles.navBar
+        }
+      >
         <div className={Styles.flexStart}>
           <div style={{ display: "flex" }}>
             <div className={Styles.webLogo}>
@@ -49,11 +57,19 @@ export default function NavBar() {
               <GiMuscleUp />
             </div>
             <div className={Styles.webName}>
-              Gym<span style={{ color: "tomato" }}>Hut</span>
+              Gym
+              <span
+                style={{ color: "tomato", fontFamily: '"Anton", sans-serif' }}
+              >
+                Hut
+              </span>
             </div>
           </div>
         </div>
-        <div className={Styles.centerFlex}>
+
+        <div
+          className={isClick === false ? Styles.centerFlex : Styles.navLinksRes}
+        >
           <h3 className={Styles.navLinks} onClick={() => history.push("/")}>
             Home
           </h3>
@@ -75,6 +91,13 @@ export default function NavBar() {
           >
             Membership
           </h3>
+
+          <h3
+            className={Styles.navLinks}
+            onClick={() => history.push("/products")}
+          >
+            Products
+          </h3>
           <h3
             className={Styles.navLinks}
             onClick={() => history.push("/about")}
@@ -95,8 +118,8 @@ export default function NavBar() {
                 className={Styles.login}
                 onClick={() =>
                   history.push({
-                    pathname: "./signUp",
-                    type: "signup",
+                    pathname: "./signIn",
+                    type: "signin",
                     recentPage: window.location.pathname,
                   })
                 }
@@ -122,10 +145,14 @@ export default function NavBar() {
             )}
           </div>
         </div>
-        <div className={Styles.endFlex_1}>
-          <RiMenuAddFill className={Styles.menu} />
-        </div>
       </div>
+
+      {/* <div className={Styles.endFlex_1}>
+        <RiMenuAddFill
+          className={Styles.menu}
+          onClick={() => setIsClick(true)}
+        />
+      </div> */}
     </div>
   );
 }

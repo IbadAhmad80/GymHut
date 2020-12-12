@@ -14,9 +14,23 @@ export default function Contact() {
         <NavBar />
         <div className={Styles.mainGrid}>
           <div style={{ gridRow: "1" }}></div>
-          <div className={Styles.boxContent}>
-            <h3 style={{ fontSize: "1.3vw", color: "maroon" }}>Contact Us</h3>
-            <h3> Our Help Center</h3>
+          <div
+            className={Styles.boxContent}
+            style={{ fontFamily: '"Oswald", sans-serif' }}
+          >
+            <h3
+              style={{
+                fontSize: "1.3vw",
+                color: "maroon",
+                fontFamily: '"Oswald", sans-serif',
+              }}
+            >
+              Contact Us
+            </h3>
+            <h3 style={{ fontFamily: '"Oswald", sans-serif' }}>
+              {" "}
+              Our Help Center
+            </h3>
           </div>
         </div>
       </div>

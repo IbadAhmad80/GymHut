@@ -1,4 +1,3 @@
-const { json } = require("body-parser");
 const { request } = require("express");
 const express = require("express");
 const Query = require("../Schemas/contactSchema");

@@ -1,7 +1,7 @@
 import React from "react";
 import Styles from "./home.module.css";
 import NavBar from "../navbar";
-import { FiArrowRight } from "react-icons/fi";
+import { BsBoxArrowRight } from "react-icons/bs";
 import HomeCards from "./homeCards";
 import HomeToAboutGrid from "./homeToAboutGrid";
 import HomeCenterAttachment from "./homeCenterAttachment";
@@ -56,8 +56,19 @@ export default function Home() {
             className={Styles.join_us_button}
             onClick={() => history.push("/membership")}
           >
-            Join Us Now &nbsp;
-            <FiArrowRight />
+            <span
+              style={{
+                paddingTop: "0.7vw",
+                fontFamily: '"Montserrat", sans-serif',
+              }}
+            >
+              {" "}
+              Join Us Now &nbsp;
+            </span>
+
+            <span style={{ fontSize: "2vw", paddingTop: "0.2vw" }}>
+              <BsBoxArrowRight />
+            </span>
           </button>
         </div>
       </div>

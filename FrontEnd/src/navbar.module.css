@@ -14,31 +14,46 @@
   list-style: none;
   z-index: 99;
 }
+
+.prodNav {
+  background-color: rgb(5, 1, 22);
+  display: flex;
+  width: 100vw;
+  height: 12vh;
+  flex-direction: row;
+  list-style: none;
+}
 .navBarScrolled {
   margin-top: -4vw;
   position: fixed;
-  background-color: rgb(6, 6, 26);
+  background-color: rgb(5, 1, 22);
   display: flex;
   width: 100vw;
   height: 12vh;
   flex-direction: row;
   list-style: none;
   z-index: 99;
+  padding-top: 0.7vw;
 }
 .login {
-  margin-left: 15vw;
+  margin-left: 15.5vw;
   font-size: 1.3vw;
   padding-top: 1vw;
   padding-bottom: 1vw;
   font-family: Verdana, Geneva, Tahoma, sans-serif;
+  text-transform: uppercase;
 }
 .logout {
-  flex: 0.7;
-  color: maroon;
+  flex: 1;
+  color: red;
   font-size: 1.3vw;
   padding-top: 1vw;
+  border: none;
+  outline: none;
+  background-color: white;
   padding-bottom: 1vw;
   font-family: Verdana, Geneva, Tahoma, sans-serif;
+  text-transform: uppercase;
 }
 
 .login:hover {
@@ -92,6 +107,7 @@
 }
 
 .centerFlex {
+  /* padding-top: 1vw; */
   flex: 2;
   align-self: center;
   display: flex;
@@ -116,6 +132,7 @@
 }
 
 .endFlex {
+  /* padding-top: 0.4vw; */
   flex: 1;
   align-self: top;
   margin-top: 1vw;
@@ -127,6 +144,7 @@
   font-size: 2.5vw;
 }
 .tel_phone_logo {
+  padding-top: 0.2vw;
   flex: 0.2;
   justify-content: center;
   font-size: 5vh;
@@ -141,17 +159,7 @@
   font-weight: bolder;
 }
 
-.end_flex_1 {
-  display: none;
-}
-
-.menu {
-  display: none;
-  font-size: larger;
-  color: white;
-}
-
-@media (max-width: 1120px) {
+@media (max-width: 1150px) {
   .centerFlex {
     display: none;
   }
@@ -159,11 +167,30 @@
   .endFlex {
     display: none;
   }
-  .end_flex_1 {
+
+  .navLinksRes {
+    flex: 0.5;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    background-color: rgb(102, 102, 102);
+    align-items: center;
+    width: 50vw;
+  }
+
+  .endFlex_1 {
     display: visible;
-    flex: 1;
+    flex: 0.1;
     align-self: center;
+    font-family: "Montserrat", sans-serif;
+  }
+  .menu {
+    color: white;
+    font-size: 1.8vw;
     color: tomato;
-    justify-self: end;
+  }
+  .menu:hover {
+    cursor: pointer;
+    font-size: 2vw;
   }
 }

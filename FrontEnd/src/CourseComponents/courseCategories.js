@@ -18,6 +18,7 @@ export default function CourseCategories() {
             history.push({
               pathname: "/courses",
               category: "Fitness",
+              cat: "none",
             })
           }
         >

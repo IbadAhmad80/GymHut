@@ -3,7 +3,7 @@ import NavBar from "../navbar";
 import Fotter from "../footer";
 import Styles_1 from "../MembershipsComponents/members.module.css";
 import Styles from "../CourseComponents/courses.module.css";
-import training from "../assets/training.jpg";
+import dumbbell from "../assets/dumbbell.jpg";
 import { useLocation } from "react-router-dom";
 import Features from "./courseFeatures";
 import CourseStats from "./courseStats";
@@ -17,7 +17,7 @@ export default function CoursDetails(props) {
     <div>
       <div
         className={Styles_1.grid}
-        style={{ backgroundImage: `url(${training})` }}
+        style={{ backgroundImage: `url(${dumbbell})` }}
       >
         <NavBar />
         <div className={Styles_1.mainGrid}>
@@ -28,12 +28,15 @@ export default function CoursDetails(props) {
                 color: "tomato",
                 fontSize: "1.7vw",
                 textTransform: "capitalize",
-                marginBottom: "0.5vw",
+                marginBottom: "0.1vw",
+                fontFamily: '"Oswald", sans-serif',
               }}
             >
               Course Single
             </h3>
-            <h3>{location.courseName}</h3>
+            <h3 style={{ fontFamily: '"Oswald", sans-serif' }}>
+              {location.courseName}
+            </h3>
           </div>
         </div>
       </div>

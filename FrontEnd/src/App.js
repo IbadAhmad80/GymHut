@@ -9,6 +9,9 @@ import AllCourses from "./CourseComponents/allCourses";
 import Post from "./Posts/post";
 import PostDetails from "./Posts/postDetails";
 import SignIn from "./SignUpComponents/Signin";
+import Products from "./Products/products";
+import ProductDetail from "./Products/productDetails";
+import ProductCart from "./Products/productCart";
 export default class App extends Component {
   render() {
     return (
@@ -31,6 +34,9 @@ export default class App extends Component {
           <Route path="/blogDetails" component={PostDetails} />
           <Route path="/signUp" component={SignIn} />
           <Route path="/signIn" component={SignIn} />
+          <Route path="/products" component={Products} />
+          <Route path="/productDetail" component={ProductDetail} />
+          <Route path="/cart" component={ProductCart} />
         </Switch>
       </div>
     );

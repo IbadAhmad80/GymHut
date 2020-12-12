@@ -1,3 +1,5 @@
+@import url("https://fonts.googleapis.com/css2?family=Langar&display=swap");
+
 * {
   padding: 0;
   margin: 0;
@@ -5,7 +7,7 @@
 }
 
 .grid {
-  background-image: url(../assets/man-1282232_1920.jpg);
+  background-image: url(../assets/man_1282232_1920.jpg);
   background-repeat: no-repeat;
   background-size: 100% 100%;
   background-attachment: fixed;

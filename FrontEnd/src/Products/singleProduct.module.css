@@ -1,0 +1,73 @@
+* {
+  font-family: "intro";
+  margin: 0;
+  padding: 0;
+}
+
+.post:hover .post_s {
+  height: 50px;
+}
+
+.post_s {
+  margin-top: 85px;
+  margin-left: 232px;
+  height: 0px;
+  background-image: linear-gradient(tomato, orange);
+  position: absolute;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  overflow: hidden;
+  transition: 0.7s ease;
+}
+
+.yetToBe:hover {
+  color: black;
+}
+
+.detail {
+  margin-top: 2vw;
+  display: flex;
+}
+
+.name {
+  padding-left: 2vw;
+  padding-top: 0.3vw;
+  flex: 3;
+  font-size: 1.6;
+  font-family: Verdana, Geneva, Tahoma, sans-serif;
+  padding-bottom: 2vw;
+  font-weight: bolder;
+}
+
+.price {
+  flex: 1;
+  font-size: 1.6vw;
+  font-family: Verdana, Geneva, Tahoma, sans-serif;
+  padding-bottom: 2vw;
+}
+
+.added {
+  padding-top: 10px;
+  padding-bottom: 10px;
+  padding-left: 12px;
+  padding-right: 10px;
+  font-size: 1.2vw;
+  text-align: center;
+  font-weight: bolder;
+  color: white;
+  transition: color;
+}
+
+.yetToBe {
+  padding-top: 1vw;
+  padding-right: 1.24vw;
+  padding-left: 1.24vw;
+  font-weight: bolder;
+  font-size: 2.5vw;
+  color: white;
+  transition: color;
+  transition-property: inherit;
+  transition-duration: 0.3s;
+  transition-timing-function: ease-in;
+}

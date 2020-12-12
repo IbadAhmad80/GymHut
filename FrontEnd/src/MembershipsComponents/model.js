@@ -42,9 +42,9 @@ export default function Model() {
             male: male,
           });
           const formData = { height, weight, female, male };
-          // console.log(
-          //   `Data sent to server is : ${initialValues.height} \n ${initialValues.weight} \n ${initialValues.female} \n ${initialValues.male}`
-          // );
+          console.log(
+            `Data sent to server is :\n height : ${initialValues.height} \n weight: ${initialValues.weight} \n female :${initialValues.female} \n male :${initialValues.male}`
+          );
           axios
             .post("http://127.0.0.1:5000/prediction/", JSON.stringify(formData))
             .then((response) => {
@@ -147,25 +147,55 @@ export default function Model() {
                   <div className={Styles.logo}>
                     <RiGenderlessFill />
                   </div>
-                  <Field
-                    style={{
-                      flex: "2",
-                      height: "4vw",
-                      marginTop: "0.3vw",
-                      outline: "none",
-                      border: "none",
-                      marginRight: "1vw",
-                      fontSize: "1.4vw",
-                    }}
-                    type="text"
-                    name="gender"
-                    id="gender"
-                    placeholder=" Enter gender "
-                    className={
-                      errors.gender && touched.gender ? "input-error" : null
-                    }
-                  />
-
+                  <label>
+                    <Field
+                      style={{
+                        flex: "2",
+                        height: "4vw",
+                        marginTop: "0.3vw",
+                        outline: "none",
+                        border: "none",
+                        marginRight: "1vw",
+                        marginLeft: "0.5vw",
+                        fontSize: "1.4vw",
+                      }}
+                      type="radio"
+                      name="gender"
+                      id="gender"
+                      value="Male"
+                      className={
+                        errors.gender && touched.gender ? "input-error" : null
+                      }
+                    />
+                  </label>
+                  <h6 style={{ fontSize: "1.3vw", marginTop: "1.5vw" }}>
+                    Male
+                  </h6>
+                  <label>
+                    <Field
+                      style={{
+                        flex: "2",
+                        height: "4vw",
+                        marginTop: "0.3vw",
+                        outline: "none",
+                        border: "none",
+                        marginRight: "1vw",
+                        fontSize: "1.4vw",
+                        marginLeft: "2vw",
+                      }}
+                      type="radio"
+                      name="gender"
+                      id="gender"
+                      value="Female"
+                      placeholder="Female"
+                      className={
+                        errors.gender && touched.gender ? "input-error" : null
+                      }
+                    />
+                  </label>
+                  <h6 style={{ fontSize: "1.3vw", marginTop: "1.5vw" }}>
+                    Female
+                  </h6>
                   <div>
                     {" "}
                     <br />
@@ -178,7 +208,7 @@ export default function Model() {
                       style={{
                         color: "maroon",
                         fontSize: "1.2vw",
-                        marginLeft: "-18vw",
+                        marginLeft: "-5vw",
                       }}
                     />
                   </div>

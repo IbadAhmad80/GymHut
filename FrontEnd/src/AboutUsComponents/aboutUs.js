@@ -21,8 +21,16 @@ export default function About() {
         <div className={Styles.mainGrid}>
           <div style={{ gridRow: "1" }}></div>
           <div className={Styles.boxContent}>
-            <h3 style={{ fontSize: "1.3vw", color: "maroon" }}>About Us</h3>
-            <h3>Who we Are</h3>
+            <h3
+              style={{
+                fontSize: "1.3vw",
+                color: "maroon",
+                fontFamily: '"Oswald", sans-serif',
+              }}
+            >
+              About Us
+            </h3>
+            <h3 style={{ fontFamily: '"Oswald", sans-serif' }}>Who we Are</h3>
           </div>
         </div>
       </div>

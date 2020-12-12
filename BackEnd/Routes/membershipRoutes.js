@@ -1,4 +1,3 @@
-const { json } = require("body-parser");
 const express = require("express");
 const Members = require("../Schemas/membershipSchema");
 const router = express.Router();
@@ -22,7 +21,11 @@ router.get("/", async (req, res) => {
 });
 
 router.post("/signIn", async (req, res) => {
-  // console.log(`Data of Existed Member : ${req.body.email.toLowerCase()}`);
+  // console.log(
+  //   `Data of Existed Member : ${req.body.email.toLowerCase()} \n password : ${
+  //     req.body.password
+  //   } `
+  // );
   try {
     const { error } = loginValidation(req.body);
     if (error) {
@@ -32,7 +35,8 @@ router.post("/signIn", async (req, res) => {
         email: req.body.email.toLowerCase(),
         password: req.body.password,
       });
-      if (Object.entries(members).length !== 0) {
+
+      if (members !== null) {
         // console.log(`members emaill : ${req.body.email.toLowerCase()}`);
         const user = { name: req.body.email.toLowerCase() };
         const accessToken = jwt.sign(user, process.env.ACCESS_TOKEN_SECRET);
@@ -134,13 +138,13 @@ router.post("/payment", async (req, res) => {
         email: token.email,
       },
       (error, msg) => {
-        if (msg !== null) console.log(msg);
-        else console.log("null ");
+        // if (msg !== null) console.log(msg);
+        // else console.log("null ");
       }
     );
     // console.log("member", member);
     if (Object.entries(member).length === 0) {
-      console.log("Already a member");
+      // console.log("Already a member");
       res.status(403).send("You are already a Member");
     } else {
       const customer = await stripe.customers.create({

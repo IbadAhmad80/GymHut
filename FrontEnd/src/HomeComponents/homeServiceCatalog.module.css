@@ -6,7 +6,7 @@
 
 .mainGrid {
   margin-left: 3vw;
-  margin-top: 3vw;
+  margin-top: 6vw;
   display: grid;
   grid-template-rows: minmax(50px, 100px);
   justify-content: center;

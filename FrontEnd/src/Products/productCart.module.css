@@ -1,0 +1,144 @@
+* {
+  padding: 0;
+  margin: 0;
+  box-sizing: content-box;
+}
+
+.cartHeading {
+  margin-top: 5vw;
+  text-align: center;
+  font-size: 3.5vw;
+  font-family: "Langar", cursive;
+  font-weight: bolder;
+  letter-spacing: 0.15cm;
+  margin-bottom: 5vw;
+  color: brown;
+}
+
+.emptyCart {
+  padding-left: 1.4vw;
+  padding-right: 1vw;
+  padding-top: 0.7vw;
+  padding-bottom: 0.7vw;
+  margin-left: 70vw;
+  margin-right: 8vw;
+  font-size: 2.3vw;
+  font-family: "Langar", cursive;
+  font-weight: bolder;
+  letter-spacing: 0.15cm;
+  margin-bottom: 3vw;
+  color: rgb(211, 106, 8);
+  transition-property: all;
+  transition-duration: 1000ms;
+  transition-timing-function: ease-out;
+  border: 2px solid maroon;
+  color: maroon;
+}
+
+.emptyCart:hover {
+  background-image: linear-gradient(tomato, orange);
+  cursor: pointer;
+  color: white;
+  border: 2px solid white;
+}
+
+.cartMenu {
+  margin-top: 4vw;
+  margin-left: 4vw;
+  margin-right: 2vw;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  margin-bottom: 2vw;
+}
+.cartMenu_1 {
+  margin-left: 4vw;
+  margin-right: 2vw;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  margin-bottom: 3vw;
+}
+
+.bill {
+  margin-bottom: 2vw;
+  font-size: 1.8vw;
+  font-family: Verdana, Geneva, Tahoma, sans-serif;
+  margin-left: 70vw;
+}
+
+.product {
+  flex: 1;
+  font-size: 1.3vw;
+  font-family: "Anton", sans-serif;
+  text-align: center;
+  letter-spacing: 0.05cm;
+}
+.name {
+  flex: 1.3;
+  font-size: 1.3vw;
+  font-family: "Anton", sans-serif;
+  text-align: center;
+  letter-spacing: 0.05cm;
+}
+
+.name_1 {
+  flex: 1.3;
+  font-size: 1.3vw;
+  font-family: Verdana, Geneva, Tahoma, sans-serif;
+  text-align: center;
+}
+
+.price {
+  flex: 1;
+  font-size: 1.3vw;
+  font-family: "Anton", sans-serif;
+  text-align: center;
+  letter-spacing: 0.05cm;
+}
+
+.price_1 {
+  flex: 1;
+  font-size: 1.3vw;
+  font-family: Verdana, Geneva, Tahoma, sans-serif;
+  text-align: center;
+}
+
+.remove {
+  flex: 1;
+  font-size: 1.3vw;
+  font-family: "Anton", sans-serif;
+  text-align: center;
+  letter-spacing: 0.05cm;
+}
+
+.remove_1 {
+  flex: 1;
+  font-size: 2.5vw;
+  font-family: "Anton", sans-serif;
+  text-align: center;
+  color: orangered;
+  transition-property: font-size;
+  transition-duration: 0.3s;
+  transition-timing-function: ease-out;
+}
+
+.remove_1:hover {
+  font-size: 2.7vw;
+  cursor: pointer;
+}
+
+.quantity {
+  flex: 1;
+  font-size: 1.3vw;
+  font-family: "Anton", sans-serif;
+  text-align: center;
+  letter-spacing: 0.05cm;
+}
+
+.quantity_1 {
+  flex: 1;
+  font-size: 1.3vw;
+  font-family: Verdana, Geneva, Tahoma, sans-serif;
+  text-align: center;
+}

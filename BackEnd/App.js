@@ -6,6 +6,7 @@ const Posts = require("./Routes/postRoutes");
 const Members = require("./Routes/membershipRoutes");
 const Courses = require("./Routes/coursesRoutes");
 const Queries = require("./Routes/contactRoutes");
+const Products = require("./Routes/productRoutes");
 const cors = require("cors");
 
 //parsing the post request for all the routes
@@ -23,17 +24,20 @@ mongoose.connect(
   }
 );
 
-//middleware for all the posts route
+//middleware for posts
 app.use("/posts", Posts);
 
-//middleware for all the posts route
+//middleware for members
 app.use("/members", Members);
 
-//middleware for all the courses route
+//middleware for courses
 app.use("/courses", Courses);
 
-//middleware for all the contact route
+//middleware for contact
 app.use("/contact", Queries);
+
+//middleware forthe product
+app.use("/products", Products);
 
 //listning to the port
 app.listen(3000, () => {

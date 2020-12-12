@@ -1,4 +1,3 @@
-const { json } = require("body-parser");
 const express = require("express");
 const Courses = require("../Schemas/coursesSchema");
 const router = express.Router();
@@ -11,6 +10,15 @@ const uuid = require("uuid");
 router.get("/", async (req, res) => {
   try {
     const posts = await Courses.find().limit(9);
+    res.json(posts);
+  } catch (error) {
+    res.json({ message: error });
+  }
+});
+
+router.get("/AllCourses", async (req, res) => {
+  try {
+    const posts = await Courses.find();
     res.json(posts);
   } catch (error) {
     res.json({ message: error });

@@ -104,16 +104,19 @@
 }
 
 .subscribe_button {
+  margin-top: 2vw;
+  margin-left: 7vw;
   grid-row: 5;
-  grid-column: 3/5;
-  justify-self: center;
+  grid-column: 5;
+  justify-self: end;
   align-self: end;
   font-family: "Montserrat", sans-serif;
   font-weight: bolder;
-  font-size: 0.7vw;
+  font-size: 0.8vw;
   letter-spacing: 0.05cm;
   padding: 1vw;
   color: white;
+  outline: none;
   border: 0.5px solid white;
   transition: font-size;
   transition-timing-function: linear;

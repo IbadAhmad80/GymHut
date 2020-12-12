@@ -4,7 +4,7 @@
   box-sizing: content-box;
 }
 .grid {
-  background-image: url(../assets/darkness-4206708_1920.jpg);
+  background-image: url(../assets/darkness.jpg);
   background-repeat: no-repeat;
   background-size: 100% 100%;
   background-attachment: fixed;
@@ -95,17 +95,17 @@
 }
 
 .join_us_button {
+  display: flex;
   grid-column: 2/3;
   grid-row: 6;
-  padding: 1.2vw;
-  font-family: "Montserrat", sans-serif;
+  padding: 1.1vw;
   font-weight: bolder;
   align-self: end;
   font-size: 1vw;
   letter-spacing: 0.05cm;
   color: white;
   border: 0.5px solid white;
-  transition: font-size;
+  transition: background-image;
   transition-timing-function: linear;
   transition-duration: 0.3s;
   text-transform: uppercase;
@@ -113,7 +113,8 @@
   margin-bottom: 10vw;
 }
 .join_us_button:hover {
-  font-size: 1.1vw;
+  background-image: linear-gradient(black, rgb(73, 68, 68));
+  cursor: pointer;
 }
 
 @keyframes slide_in {
@@ -158,7 +159,7 @@
 }
 
 .serviceCatalog_1 {
-  margin-top: 6vw;
+  margin-top: 9vw;
   display: grid;
   grid-template-rows: minmax(70px, 110px);
   justify-content: center;

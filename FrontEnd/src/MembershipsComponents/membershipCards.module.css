@@ -30,6 +30,7 @@
   transition-duration: 0.3s;
   text-align: center;
   text-transform: uppercase;
+  font-weight: bolder;
 }
 
 .stripe_button_2 {
@@ -49,6 +50,8 @@
   color: white;
   text-transform: uppercase;
   border: none;
+  font-weight: bolder;
+  letter-spacing: 0.05cm;
 }
 
 .stripe_button_1:hover {
@@ -84,6 +87,7 @@
   font-size: 6vw;
   letter-spacing: 0.05cm;
   word-spacing: 0.1cm;
+  font-family: "Peddana", serif;
 }
 
 .services {
@@ -92,6 +96,7 @@
   margin-left: 1vw;
   font-size: 1.7vw;
   margin-bottom: 3vw;
+  font-family: "Peddana", serif;
 }
 
 .logoColor {

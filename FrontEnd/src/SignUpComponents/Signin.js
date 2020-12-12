@@ -1,8 +1,7 @@
 import React from "react";
 import styled from "styled-components";
-// import bgImg from "../assets/bg.png";
 import lake from "../assets/lake.jpg";
-import dumbbell from "../assets/dumbbell.jpg";
+// import darkness from "../assets/darkness.jpg";
 import Sidebar from "./Sidebar";
 import Main from "./Main";
 

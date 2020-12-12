@@ -6,6 +6,7 @@ import SinglePost from "./singlePost";
 import axios from "axios";
 import { useLocation } from "react-router-dom";
 import Loader from "react-loader-spinner";
+import Styles_2 from "../MembershipsComponents/members.module.css";
 // importing all the css for loader
 import "react-loader-spinner/dist/loader/css/react-spinner-loader.css";
 
@@ -72,8 +73,18 @@ export default function Posts() {
         <div className={Styles.mainGrid}>
           <div style={{ gridRow: "1" }}></div>
           <div className={Styles.boxContent}>
-            <h3 style={{ fontSize: "1.3vw", color: "maroon" }}>Our Blogs</h3>
-            <h3>Blog Articles</h3>
+            <h3
+              style={{
+                fontSize: "1.3vw",
+                color: "maroon",
+                fontFamily: '"Oswald", sans-serif',
+              }}
+            >
+              Our Blogs
+            </h3>
+            <h3 style={{ fontFamily: '"Oswald", sans-serif' }}>
+              Blog Articles
+            </h3>
           </div>
         </div>
       </div>
@@ -89,6 +100,7 @@ export default function Posts() {
         Loading&nbsp;&nbsp;&nbsp;
         <span>
           <Loader
+            style={{ marginTop: "1vw" }}
             type="Bars"
             color="#00BFFF"
             height={50}
@@ -106,9 +118,26 @@ export default function Posts() {
         <div className={Styles.mainGrid}>
           <div style={{ gridRow: "1" }}></div>
           <div className={Styles.boxContent}>
-            <h3 style={{ fontSize: "1.3vw", color: "maroon" }}>Our Blogs</h3>
-            <h3>Blog Articles</h3>
+            <h3
+              style={{
+                fontSize: "1.3vw",
+                color: "maroon",
+                fontFamily: '"Oswald", sans-serif',
+              }}
+            >
+              Our Blogs
+            </h3>
+            <h3 style={{ fontFamily: '"Oswald", sans-serif' }}>
+              Blog Articles
+            </h3>
           </div>
+        </div>
+      </div>
+      <div className={Styles_2.imageCatalog}>
+        <div className={Styles_2.imageborderTop}>___</div>
+        <div className={Styles_2.imageHeading}>Popular Blogs</div>
+        <div className={Styles_2.imageSub_heading}>
+          Get insights of our top most rated professionals
         </div>
       </div>
       <div className={Styles.posts}>

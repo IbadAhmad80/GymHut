@@ -22,4 +22,6 @@ content-type: application/json
 Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJuYW1lIjoiaWJhZDIzYWhtYWRAZ21haWwuY29tIiwiaWF0IjoxNjA2NjU3NDkxfQ.x65pFy3t48BwIfrsc91D3YlOZEAUr7lRVhKh5JPuIZc
 
 
-
+###
+GET http://localhost:3000/products
+content-type: application/json

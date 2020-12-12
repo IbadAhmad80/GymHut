@@ -55,8 +55,18 @@ export default function PostDetails() {
         <div className={Styles.mainGrid}>
           <div style={{ gridRow: "1" }}></div>
           <div className={Styles.boxContent}>
-            <h3 style={{ fontSize: "1.3vw", color: "maroon" }}>Single Post</h3>
-            <h3>{location.name}</h3>
+            <h3
+              style={{
+                fontSize: "1.3vw",
+                color: "maroon",
+                fontFamily: '"Oswald", sans-serif',
+              }}
+            >
+              Single Post
+            </h3>
+            <h3 style={{ fontFamily: '"Oswald", sans-serif' }}>
+              {location.name}
+            </h3>
           </div>
         </div>
       </div>
@@ -211,7 +221,6 @@ export default function PostDetails() {
             {" "}
             <PostCategories category={"Fitness"} number={"3"} />
             <PostCategories category={"Cycling"} number={"3"} />
-            <PostCategories category={"ParaCycling"} number={"2"} />
             <PostCategories category={"Body Building"} number={"3"} />
           </div>
           <h4 style={{ marginTop: "4vw" }}>

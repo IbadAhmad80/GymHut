@@ -38,10 +38,18 @@ export default function Membership() {
         <div className={Styles.mainGrid}>
           <div style={{ gridRow: "1" }}></div>
           <div className={Styles.boxContent}>
-            <h3 style={{ fontSize: "1.3vw", color: "maroon" }}>
+            <h3
+              style={{
+                fontSize: "1.3vw",
+                color: "maroon",
+                fontFamily: '"Oswald", sans-serif',
+              }}
+            >
               Get Memberships
             </h3>
-            <h3>Discounts we offer</h3>
+            <h3 style={{ fontFamily: '"Oswald", sans-serif' }}>
+              Discounts we offer
+            </h3>
           </div>
         </div>
       </div>
@@ -140,6 +148,7 @@ export default function Membership() {
           Loading&nbsp;&nbsp;&nbsp;
           <span>
             <Loader
+              style={{ marginTop: "1vw" }}
               type="Hearts"
               color="#00BFFF"
               height={100}

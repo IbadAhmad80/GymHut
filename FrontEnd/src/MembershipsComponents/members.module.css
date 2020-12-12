@@ -5,7 +5,7 @@
 }
 
 .grid {
-  background-image: url(../assets/running.jpg);
+  background-image: url(../assets/man_1282232_1920.jpg);
   background-repeat: no-repeat;
   background-size: 100% 100%;
   background-attachment: fixed;
@@ -104,12 +104,13 @@
   grid-template-columns: 1fr 1fr 1fr;
   margin-left: 7vw;
   margin-right: 7vw;
-  grid-template-rows: minmax(50px, 400px);
+  grid-template-rows: minmax(50px, 440px);
   row-gap: 2vw;
   column-gap: 4vw;
 }
 
-.all_courses_button {
+.all_courses_button,
+.loadMore {
   margin-top: 2vw;
   grid-row: 2;
   grid-column: 1/4;
@@ -131,8 +132,13 @@
   text-transform: uppercase;
   margin-bottom: 0vw;
   background-image: linear-gradient(orange, tomato);
+  outline: none;
 }
 .all_courses_button:hover {
+  font-size: 1.1vw;
+}
+
+.loadMore:hover {
   font-size: 1.1vw;
 }
 
