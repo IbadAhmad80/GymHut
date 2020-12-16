@@ -34,17 +34,19 @@
   padding-left: 2vw;
   padding-top: 0.3vw;
   flex: 3;
-  font-size: 1.6;
-  font-family: Verdana, Geneva, Tahoma, sans-serif;
+  font-size: 1.3vw;
+  font-family: sans-serif;
   padding-bottom: 2vw;
   font-weight: bolder;
+  color: rgb(9, 9, 133);
 }
 
 .price {
   flex: 1;
   font-size: 1.6vw;
-  font-family: Verdana, Geneva, Tahoma, sans-serif;
+  font-family: sans-serif;
   padding-bottom: 2vw;
+  color: rgba(0, 0, 0, 0.781);
 }
 
 .added {

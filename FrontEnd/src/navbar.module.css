@@ -6,7 +6,7 @@
 
 .navBar {
   position: fixed;
-  background-color: transparent;
+  background-color: rgba(0, 0, 0);
   display: flex;
   width: 100vw;
   height: 12vh;
@@ -24,7 +24,7 @@
   list-style: none;
 }
 .navBarScrolled {
-  margin-top: -4vw;
+  margin-top: -5vw;
   position: fixed;
   background-color: rgb(5, 1, 22);
   display: flex;
@@ -144,11 +144,12 @@
   font-size: 2.5vw;
 }
 .tel_phone_logo {
-  padding-top: 0.2vw;
+  padding-top: 0.4vw;
   flex: 0.2;
   justify-content: center;
-  font-size: 5vh;
-  color: maroon;
+  font-size: 6.5vh;
+  color: rgb(245, 63, 7);
+  padding-right: 0.5vw;
 }
 
 .tel_phone {

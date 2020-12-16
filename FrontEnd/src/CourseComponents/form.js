@@ -21,6 +21,8 @@ export default function SignInForm({
   membership,
   price,
   course,
+  product,
+  data,
 }) {
   // console.log(
   //   `membership type : ${membershipValue} \n price : ${price} \n payment type  ${payment} \n course name : ${course}`
@@ -149,7 +151,7 @@ export default function SignInForm({
                   <Field
                     style={{
                       flex: "2",
-                      height: "2vw",
+                      height: payment === "set" ? "2.2vw" : "2vw",
                       marginTop: "0.3vw",
                       outline: "none",
                       border: "none",
@@ -186,7 +188,7 @@ export default function SignInForm({
                   <Field
                     style={{
                       flex: "2",
-                      height: "2vw",
+                      height: payment === "set" ? "2.2vw" : "2vw",
                       marginTop: "0.3vw",
                       outline: "none",
                       border: "none",
@@ -217,7 +219,7 @@ export default function SignInForm({
                     />
                   </div>
                 </div>
-                {payment !== "set" ? (
+                {payment !== "set" || payment === "product" ? (
                   <div>
                     <button
                       style={{

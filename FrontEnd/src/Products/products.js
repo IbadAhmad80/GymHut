@@ -7,13 +7,63 @@ import Styles_1 from "../MembershipsComponents/members.module.css";
 import axios from "axios";
 import Loader from "react-loader-spinner";
 import { FaCartArrowDown } from "react-icons/fa";
+import { BsSearch } from "react-icons/bs";
 import { useHistory } from "react-router-dom";
 
 export default function Products() {
   const history = useHistory();
+  const [values, setValues] = useState({ name: "" });
   const [loading, isLoading] = useState(false);
   const [load, setLoad] = useState(true);
   const [products, setProducts] = useState({ items: [] });
+  const [value, setValue] = useState({ dropdown: "option" });
+
+  const handleChange = (event) => {
+    setValue({ dropdown: event.target.value });
+    isLoading(false);
+    setLoad(false);
+    event.target.value === "Highest"
+      ? axios
+          .get(`http://localhost:3000/products/pricey`)
+          .then((response) => {
+            setProducts({ items: response.data });
+            isLoading(true);
+          })
+          .catch((error) => {
+            console.log("error is :", error);
+          })
+      : event.target.value === "Lowest"
+      ? axios
+          .get(`http://localhost:3000/products/cheapest`)
+          .then((response) => {
+            setProducts({ items: response.data });
+            isLoading(true);
+          })
+          .catch((error) => {
+            console.log("error is :", error);
+          })
+      : console.log("");
+  };
+
+  const handleSubmit = (event) => {
+    alert("Your favorite {submit} flavor is: " + value.dropdown);
+    event.preventDefault();
+  };
+
+  const getProductByName = () => {
+    isLoading(false);
+    setLoad(true);
+    axios
+      .get(`http://localhost:3000/products/${values.name}`)
+      .then((response) => {
+        setProducts({ items: response.data });
+        setValues({ name: "" });
+        isLoading(true);
+      })
+      .catch((error) => {
+        console.log("error is :", error);
+      });
+  };
 
   useEffect(() => {
     axios
@@ -42,21 +92,12 @@ export default function Products() {
   return loading === false ? (
     <div>
       <NavBar type="product" />
-      <div className={Styles_1.topGrid}>
-        <div className={Styles_1.cardborderTop}>___</div>
-        <div className={Styles_1.cardHeading}>Our Products</div>
-        <div className={Styles_1.imageSub_heading}>
-          Get the best of our Gym products cheaply
-        </div>
-      </div>
-
-      <div
+      <h6
         style={{
           marginTop: "3vw",
           textAlign: "center",
-          fontSize: "2vw",
-          fontWeight: "bold",
-          marginBottom: "3vw",
+          fontSize: "1.6vw",
+          fontWeight: "bolder",
         }}
       >
         Loading&nbsp;&nbsp;&nbsp;
@@ -71,7 +112,7 @@ export default function Products() {
           />
         </span>
         <Fotter />
-      </div>
+      </h6>
     </div>
   ) : (
     <div style={{ backgroundColor: "rgb(240, 245, 245)" }}>
@@ -96,9 +137,43 @@ export default function Products() {
         <div className={Styles_1.cardborderTop}>___</div>
         <div className={Styles_1.cardHeading}>Our Products</div>
         <div className={Styles_1.imageSub_heading}>
-          Get the best of our Gym products cheaply
+          Get the best of our Gym merchandise cheaply
         </div>
       </div>
+
+      <div className={Styles.getProducts}>
+        <div className={Styles.searchBar}>
+          <div className={Styles.search}>
+            <input
+              type="text"
+              placeholder="Search By Name"
+              className={Styles.search}
+              value={values.name}
+              onChange={(e) => setValues({ name: e.target.value })}
+            />
+          </div>
+          <div className={Styles.searchLogo}>
+            <BsSearch onClick={() => getProductByName()} />
+          </div>
+        </div>
+        <div className={Styles.dropdownItem}>
+          <form onSubmit={handleSubmit}>
+            <label className={Styles.sortHeading}>
+              Sort By:
+              <select
+                value={value.dropdown}
+                onChange={handleChange}
+                className={Styles.dropdown}
+              >
+                <option value="option">Select Type</option>
+                <option value="Highest">Highest</option>
+                <option value="Lowest">Lowest</option>
+              </select>
+            </label>
+          </form>
+        </div>
+      </div>
+      {/* <div><h6>No of Items in the Cart</h6><h5>{length}</h5></div> */}
 
       <div className={Styles.products}>
         {products.items.map(({ name, price, type }) => (
@@ -112,7 +187,7 @@ export default function Products() {
           className={Styles_1.loadMore}
           onClick={setAllProducts}
         >
-          Load More
+          Load All
         </button>
       ) : (
         console.log("")

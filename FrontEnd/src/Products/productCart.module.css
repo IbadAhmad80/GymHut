@@ -11,7 +11,7 @@
   font-family: "Langar", cursive;
   font-weight: bolder;
   letter-spacing: 0.15cm;
-  margin-bottom: 5vw;
+  margin-bottom: 3vw;
   color: brown;
 }
 
@@ -26,13 +26,13 @@
   font-family: "Langar", cursive;
   font-weight: bolder;
   letter-spacing: 0.15cm;
-  margin-bottom: 3vw;
   color: rgb(211, 106, 8);
   transition-property: all;
   transition-duration: 1000ms;
   transition-timing-function: ease-out;
   border: 2px solid maroon;
   color: maroon;
+  margin-bottom: 7vw;
 }
 
 .emptyCart:hover {
@@ -62,8 +62,8 @@
 
 .bill {
   margin-bottom: 2vw;
-  font-size: 1.8vw;
-  font-family: Verdana, Geneva, Tahoma, sans-serif;
+  font-size: 2.2vw;
+  font-family: "Langar", cursive;
   margin-left: 70vw;
 }
 
@@ -141,4 +141,35 @@
   font-size: 1.3vw;
   font-family: Verdana, Geneva, Tahoma, sans-serif;
   text-align: center;
+}
+
+.paymentButton {
+  margin-top: 1vw;
+  margin-left: 5vw;
+  margin-left: 71vw;
+  margin-right: 4vw;
+  font-size: 1.9vw;
+  text-transform: capitalize;
+  padding-top: 1.2vw;
+  padding-bottom: 1.2vw;
+  padding-left: 1vw;
+  padding-right: 1vw;
+  background-color: transparent;
+  transition-property: all;
+  transition-timing-function: ease-in;
+  transition-duration: 500ms;
+  font-family: "Langar", cursive;
+  letter-spacing: 0.09cm;
+  outline: none;
+  color: maroon;
+  border: 2px solid maroon;
+  font-weight: bolder;
+}
+
+.paymentButton:hover {
+  font-size: 2.1vw;
+  background-image: linear-gradient(tomato, orange);
+  border: 2px solid white;
+  color: white;
+  cursor: pointer;
 }

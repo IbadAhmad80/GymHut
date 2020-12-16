@@ -1,6 +1,9 @@
 import React, { useState } from "react";
 import Styles from "./productCart.module.css";
 import { useDispatch, useSelector } from "react-redux";
+import { useHistory } from "react-router-dom";
+import MemberShipForm from "../MembershipsComponents/form";
+import Rodal from "rodal";
 import NavBar from "../navbar";
 import Fotter from "../footer";
 import pant_1 from "../assets/pant_1.jpeg";
@@ -20,11 +23,30 @@ import protien_2 from "../assets/protien_2.jpg";
 import protien_3 from "../assets/protien_3.jpg";
 import { BsFillTrashFill } from "react-icons/bs";
 import { incProd, decProd, removeProd, removeAll } from "./actions";
+import "rodal/lib/rodal.css";
+import { toast } from "react-toastify";
+import "../CourseComponents/modalStyles.css";
+toast.configure();
 
 export default function ProductCart() {
   const [load, setLoad] = useState("");
+  const history = useHistory();
   const product = useSelector((state) => state.product);
+  const accountData = useSelector((state) => state.account);
   const dispatch = useDispatch();
+  const [state, setState] = useState({ visible: false });
+
+  const show = () => {
+    setState({ visible: true });
+  };
+
+  const hide = () => {
+    setState({ visible: false });
+  };
+
+  // const handlePayment = (name, price) => {
+  //   alert(`price : ${price} \n product ${name}`);
+  // };
 
   const incrementProd = (name) => {
     dispatch(incProd(name));
@@ -63,6 +85,9 @@ export default function ProductCart() {
       </div>
       {Object.entries(product.products).length !== 0 ? (
         <div>
+          <h6 className={Styles.emptyCart} onClick={() => deleteCart()}>
+            Empty Cart?
+          </h6>
           <div className={Styles.cartMenu}>
             <div className={Styles.product}>PRODUCT</div>
             <div className={Styles.name}>NAME OF PRODUCT</div>
@@ -77,7 +102,7 @@ export default function ProductCart() {
                 <img
                   style={{
                     width: "100px",
-                    height: "140px",
+                    height: "100px",
                     backgroundAttachment: "cover",
                     backgroundSize: "100% 100%",
                     backgroundRepeat: "norepeat",
@@ -153,20 +178,54 @@ export default function ProductCart() {
               </div>
             </div>
           ))}
-          <h6 className={Styles.emptyCart} onClick={() => deleteCart()}>
-            Empty Cart?
-          </h6>
+
           <div style={{ marginBottom: "6vw" }}>
             <h6 className={Styles.bill}>
               Calculated Bill : {calculateBill()}$
             </h6>
             <h6 className={Styles.bill}>
-              Total Tax : {Math.ceil((calculateBill() * 2) / 100)}$
+              Tax (5%) : {Math.ceil((calculateBill() * 5) / 100)}$
             </h6>
             <h6 className={Styles.bill}>
               Total Bill :{" "}
               {calculateBill() + Math.ceil((calculateBill() * 2) / 100)}$
             </h6>
+            <button className={Styles.paymentButton} onClick={show}>
+              Continue Payment
+            </button>
+            {accountData.userName === "" ? (
+              <Rodal
+                height={430}
+                width={550}
+                visible={state.visible}
+                onClose={hide}
+                enterAnimation={"flip"}
+                duration={500}
+                leaveAnimation={"slideUp"}
+              >
+                <h2
+                  style={{
+                    fontFamily: "Verdana, Geneva, Tahoma, sans-serif",
+                    fontsize: "1.2vw",
+                    fontWeight: "bolder",
+                    textAlign: "center",
+                  }}
+                >
+                  Product Payment
+                </h2>
+                <MemberShipForm
+                  type={"product"}
+                  payment={"product"}
+                  productsData={product}
+                  accountData={accountData}
+                  totalPrice={
+                    calculateBill() + Math.ceil((calculateBill() * 2) / 100)
+                  }
+                />
+              </Rodal>
+            ) : (
+              console.log("Have to sign in first for product payment")
+            )}
           </div>
         </div>
       ) : (

@@ -45,8 +45,13 @@ const Sidebar = () => {
             response.data.userId
           )
         );
+        console.log("recent page ", location.recentPage);
         location.recentPage === "/courseDetails"
           ? history.push("courses")
+          : location.recentPage === "/productDetail"
+          ? history.push("products")
+          : location.recentPage === "/blogDetails"
+          ? history.push("blogs")
           : history.push(location.recentPage);
       })
       .catch((error) => {
@@ -73,8 +78,13 @@ const Sidebar = () => {
             response.data.userId
           )
         );
+        console.log("recent page ", location.recentPage);
         location.recentPage === "/courseDetails"
           ? history.push("courses")
+          : location.recentPage === "/productDetail"
+          ? history.push("products")
+          : location.recentPage === "/blogDetails"
+          ? history.push("blogs")
           : history.push(location.recentPage);
 
         //   history.push(location.recentPage);

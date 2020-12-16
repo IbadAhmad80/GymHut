@@ -90,7 +90,6 @@ export default function AllCourses() {
         Loading&nbsp;&nbsp;&nbsp;
         <span>
           <Loader
-            style={{ marginTop: "1vw" }}
             type="ThreeDots"
             color="#00BFFF"
             height={100}

@@ -27,7 +27,7 @@ export default function Features({
 
   const userName = useSelector((state) => state.account.userName);
   const userId = useSelector((state) => state.account.userId);
-  const accessToken = useSelector((state) => state.accessToken);
+  const accessToken = useSelector((state) => state.account.accessToken);
 
   const show = () => {
     setState({ visible: true });
@@ -74,6 +74,7 @@ export default function Features({
       })
       .then((response) => {
         console.log("Response:", response.data);
+        console.log(`course price : ${coursePrice}`);
         const { status } = response.data;
 
         if (status === "success") {
@@ -87,7 +88,7 @@ export default function Features({
       });
   };
   if (userId === "" || userName === "") {
-    if (payment !== "set") {
+    if (payment !== "set" && payment !== "product") {
       return (
         <div>
           <h3 className={Styles.featureHeading}>Class Features</h3>
@@ -171,7 +172,7 @@ export default function Features({
           </button>
           <Rodal
             height={350}
-            width={550}
+            width={450}
             visible={state.visible}
             onClose={hide}
             enterAnimation={"flip"}
@@ -230,7 +231,7 @@ export default function Features({
         <h3 className={Styles.priceHeading}>
           Price:
           <span style={{ paddingLeft: "4vw", color: "rgb(134, 128, 128)" }}>
-            {price} $
+            {price} $ {}
           </span>
         </h3>
         <StripeCheckout

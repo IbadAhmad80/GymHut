@@ -13,8 +13,16 @@ import Features from "../CourseComponents/courseFeatures";
 
 toast.configure();
 
-export default function MemberShipForm({ type, membership }) {
+export default function MemberShipForm({
+  type,
+  membership,
+  payment,
+  productsData,
+  accountData,
+  totalPrice,
+}) {
   const [state, setState] = useState({ visible: false });
+  const [formData, setData] = useState({ name: "", email: "" });
 
   const show = () => {
     setState({ visible: true });
@@ -33,27 +41,83 @@ export default function MemberShipForm({ type, membership }) {
 
   const [stripe, setStripe] = useState(true);
 
-  const handleStripe = (token, _) => {
-    console.log(token);
-    const response = axios
-      .post("http://localhost:3000/members/payment", {
-        membership,
-        token,
+  const productPayment = (name, index) => {
+    const data = {
+      name: formData.name,
+      email: formData.email,
+      quantity: productsData.quantity[index],
+      price: productsData.price[index],
+    };
+    axios
+      .put("http://localhost:3000/products/productCustomers", {
+        name,
+        data,
       })
       .then((response) => {
-        console.log("Response:", response.data);
         const { status } = response.data;
 
         if (status === "success") {
-          toast("Success! Check email for details", { type: "info" });
+          console.log("product buyers has been updated");
         }
       })
       .catch((error) => {
         if (error.response) {
-          toast(`${error.response.data}`, { type: "error" });
-          console.log(`error ${error.response.data}`);
+          toast(`${error.response.data} in product customers`, {
+            type: "error",
+          });
         }
       });
+  };
+  const handleStripe = (token, _) => {
+    console.log(token);
+    if (payment === "product") {
+      productsData.products.map((productName, index) =>
+        productPayment(productName, index)
+      );
+      axios
+        .post("http://localhost:3000/products/productPayment", {
+          token,
+          totalPrice,
+        })
+        .then((response) => {
+          const { status } = response.data;
+
+          if (status === "success") {
+            toast(`Success! Payment has been made`, {
+              type: "info",
+            });
+            console.log("payment has been made");
+          }
+        })
+        .catch((error) => {
+          if (error.response) {
+            toast(`${error.response.data} in stripe payment`, {
+              type: "error",
+            });
+          } else
+            toast(`failed to make payment due to error`, { type: "error" });
+        });
+    } else {
+      axios
+        .post("http://localhost:3000/members/payment", {
+          membership,
+          token,
+        })
+        .then((response) => {
+          console.log("Response:", response.data);
+          const { status } = response.data;
+
+          if (status === "success") {
+            toast("Success! Check email for details", { type: "info" });
+          }
+        })
+        .catch((error) => {
+          if (error.response) {
+            toast(`${error.response.data}`, { type: "error" });
+            console.log(`error ${error.response.data}`);
+          }
+        });
+    }
     setStripe(true);
   };
   const SignInSchema = Yup.object().shape({
@@ -88,7 +152,12 @@ export default function MemberShipForm({ type, membership }) {
               toast("Account has been created successfully", {
                 type: "success",
               });
-              console.log("Response from server :", response);
+              setData({
+                name: initialValues.fullName,
+                email: initialValues.email,
+              });
+              // console.log("Response from server :", response);
+
               setStripe(false);
             })
             .catch((error) => {
@@ -129,14 +198,14 @@ export default function MemberShipForm({ type, membership }) {
                   <div>
                     {" "}
                     <br />
-                    {type === "course" ? <br /> : ""}
+                    <br />
                     <ErrorMessage
                       name="fullName"
                       component="span"
                       className="error"
                       style={{
                         color: "maroon",
-                        fontSize: type === "course" ? "1.2vw" : "1.5vw",
+                        fontSize: "1.2vw",
                         marginLeft: "-23vw",
                       }}
                     />
@@ -169,14 +238,14 @@ export default function MemberShipForm({ type, membership }) {
                   <div>
                     {" "}
                     <br />
-                    {type === "course" ? <br /> : ""}
+                    <br />
                     <ErrorMessage
                       name="phoneNumber"
                       component="span"
                       className="error"
                       style={{
                         color: "maroon",
-                        fontSize: type === "course" ? "1.2vw" : "1.5vw",
+                        fontSize: "1.2vw",
                         marginLeft: "-23vw",
                       }}
                     />
@@ -207,14 +276,14 @@ export default function MemberShipForm({ type, membership }) {
                   <div>
                     {" "}
                     <br />
-                    {type === "course" ? <br /> : ""}
+                    <br />
                     <ErrorMessage
                       name="email"
                       component="span"
                       className="error"
                       style={{
                         color: "maroon",
-                        fontSize: type === "course" ? "1.2vw" : "1.5vw",
+                        fontSize: "1.2vw",
                         marginLeft: "-23vw",
                       }}
                     />
@@ -228,7 +297,7 @@ export default function MemberShipForm({ type, membership }) {
                     style={{
                       backgroundColor: "white",
                       flex: "2",
-                      height: "2vw",
+                      height: "2.5vw",
                       marginTop: "0.3vw",
                       outline: "none",
                       border: "none",
@@ -246,14 +315,14 @@ export default function MemberShipForm({ type, membership }) {
                   <div>
                     {" "}
                     <br />
-                    {type === "course" ? <br /> : ""}
+                    <br />
                     <ErrorMessage
                       name="password"
                       component="span"
                       className="error"
                       style={{
                         color: "maroon",
-                        fontSize: type === "course" ? "1.2vw" : "1.5vw",
+                        fontSize: "1.2vw",
                         marginLeft: "-23vw",
                       }}
                     />
@@ -278,11 +347,13 @@ export default function MemberShipForm({ type, membership }) {
       </Formik>
       {type === "membership" ? (
         <Features membership={membership} payment={"set"} hide={hide} />
+      ) : type === "product" ? (
+        <Features payment={payment} hide={hide} />
       ) : (
         console.log("")
       )}
 
-      {type === "membership" ? (
+      {type === "membership" || type === "product" ? (
         <div
           style={{
             marginTop: "2vw",
@@ -296,7 +367,9 @@ export default function MemberShipForm({ type, membership }) {
             name={"Payment SetUp"}
             email={initialValues.email}
             amount={
-              membership === "Standard"
+              totalPrice !== undefined
+                ? totalPrice * 100
+                : membership === "Standard"
                 ? 12 * 100
                 : membership === "Pro"
                 ? 25 * 100

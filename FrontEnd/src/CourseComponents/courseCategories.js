@@ -1,6 +1,6 @@
 import React from "react";
 import Styles from "./courseFeatures.module.css";
-import { DiCodeigniter } from "react-icons/di";
+import { MdFitnessCenter } from "react-icons/md";
 import { useHistory } from "react-router-dom";
 
 export default function CourseCategories() {
@@ -10,7 +10,7 @@ export default function CourseCategories() {
     <div>
       <h3 className={Styles.featureHeading}>Class Categories</h3>
       <h3 className={Styles.categoryHeading}>
-        <DiCodeigniter />
+        <MdFitnessCenter />
         <span
           style={{ paddingLeft: "2vw", color: "rgb(134, 128, 128)" }}
           className={Styles.category}
@@ -26,7 +26,7 @@ export default function CourseCategories() {
         </span>
       </h3>
       <h3 className={Styles.durationHeading}>
-        <DiCodeigniter />
+        <MdFitnessCenter />
         <span
           style={{ paddingLeft: "2vw", color: "rgb(134, 128, 128)" }}
           className={Styles.category}
@@ -34,6 +34,7 @@ export default function CourseCategories() {
             history.push({
               pathname: "/courses",
               category: "Wait loss",
+              cat: "none",
             })
           }
         >
@@ -41,7 +42,7 @@ export default function CourseCategories() {
         </span>
       </h3>
       <h3 className={Styles.studentsHeading}>
-        <DiCodeigniter />
+        <MdFitnessCenter />
         <span
           style={{ paddingLeft: "2vw", color: "rgb(134, 128, 128)" }}
           className={Styles.category}
@@ -49,6 +50,7 @@ export default function CourseCategories() {
             history.push({
               pathname: "/courses",
               category: "Yoga",
+              cat: "none",
             })
           }
         >
@@ -56,7 +58,7 @@ export default function CourseCategories() {
         </span>
       </h3>
       <h3 className={Styles.shiftHeading}>
-        <DiCodeigniter />
+        <MdFitnessCenter />
         <span
           style={{ paddingLeft: "2vw", color: "rgb(134, 128, 128)" }}
           className={Styles.category}
@@ -64,6 +66,7 @@ export default function CourseCategories() {
             history.push({
               pathname: "/courses",
               category: "Dieting",
+              cat: "none",
             })
           }
         >
@@ -71,7 +74,7 @@ export default function CourseCategories() {
         </span>
       </h3>
       <h3 className={Styles.priceHeading}>
-        <DiCodeigniter />
+        <MdFitnessCenter />
         <span
           style={{ paddingLeft: "2vw", color: "rgb(134, 128, 128)" }}
           className={Styles.category}
@@ -79,6 +82,7 @@ export default function CourseCategories() {
             history.push({
               pathname: "/courses",
               category: "Cycling",
+              cat: "none",
             })
           }
         >

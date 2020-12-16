@@ -30,7 +30,16 @@ export default function ProductRodal({ product, price, prod, hide_Rodal }) {
           backgroundAttachment: "cover",
           backgroundSize: "100% 100%",
           backgroundRepeat: "norepeat",
+          cursor: "pointer",
         }}
+        onClick={() =>
+          history.push({
+            pathname: "/productDetail",
+            name: product,
+            price: price,
+            prod: prod,
+          })
+        }
         src={
           prod === "pant_1"
             ? pant_1
@@ -68,7 +77,7 @@ export default function ProductRodal({ product, price, prod, hide_Rodal }) {
           marginTop: "2vw",
           textAlign: "center",
           fontWeight: "bolder",
-          fontFamily: "Verdana, Geneva, Tahoma, sans-serif",
+          fontFamily: "sans-serif",
           letterSpacing: "0.02cm",
         }}
       >
@@ -78,7 +87,7 @@ export default function ProductRodal({ product, price, prod, hide_Rodal }) {
         style={{
           marginTop: "1vw",
           textAlign: "center",
-          fontFamily: "Verdana, Geneva, Tahoma, sans-serif",
+          fontFamily: "sans-serif",
           letterSpacing: "0.02cm",
           fontWeight: "bolder",
           color: "rgb(102,102,102)",
@@ -95,13 +104,12 @@ export default function ProductRodal({ product, price, prod, hide_Rodal }) {
           paddingRight: "0.6vw",
           paddingTop: "0.7vw",
           paddingBottom: "0.7vw",
-          color: "black",
           border: "2px solid blue",
           outline: "none",
-          marginLeft: "6vw",
+          marginLeft: "4vw",
           fontWeight: "bolder",
           color: "blue",
-          marginRight: "4vw",
+          marginRight: "2vw",
           fontFamily: "Verdana",
           fontSize: "1.3vw",
           transition: "fontSize",
@@ -112,7 +120,7 @@ export default function ProductRodal({ product, price, prod, hide_Rodal }) {
         }}
         onClick={hide_Rodal}
       >
-        Cont. Shopping
+        Continue Shopping
       </button>
       <button
         className={Styles.button}
@@ -120,8 +128,8 @@ export default function ProductRodal({ product, price, prod, hide_Rodal }) {
           marginTop: "1.5vw",
           textAlign: "center",
           color: "orange",
-          paddingLeft: "0.7vw",
-          paddingRight: "0.7vw",
+          paddingLeft: "0.8vw",
+          paddingRight: "0.8vw",
           fontFamily: "Verdana",
           paddingTop: "0.7vw",
           paddingBottom: "0.7vw",

@@ -160,7 +160,7 @@ export default function SingleProduct({ prod, name, price }) {
           onClose={hide}
           enterAnimation={"zoom"}
           duration={700}
-          leaveAnimation={"fade"}
+          leaveAnimation={"zoom"}
         >
           <h2
             style={{
