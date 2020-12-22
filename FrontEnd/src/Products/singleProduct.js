@@ -17,6 +17,7 @@ import protien_3 from "../assets/protien_3.jpg";
 import { FaCartArrowDown } from "react-icons/fa";
 import Styles from "./singleProduct.module.css";
 import { useHistory } from "react-router-dom";
+
 import { BsStar, BsStarHalf, BsStarFill } from "react-icons/bs";
 import Rodal from "rodal";
 import ProductRodal from "./productRodal";

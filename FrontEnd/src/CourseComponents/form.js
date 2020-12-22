@@ -21,17 +21,27 @@ export default function SignInForm({
   membership,
   price,
   course,
-  product,
-  data,
+  // product,
+  // data,
+  productsData,
+  totalPrice,
 }) {
-  // console.log(
-  //   `membership type : ${membershipValue} \n price : ${price} \n payment type  ${payment} \n course name : ${course}`
-  // );
+  const initialValues = {
+    email: "",
+    password: "",
+  };
+  const [formData, setData] = useState({ email: "" });
+  const SignInSchema = Yup.object().shape({
+    email: Yup.string().email().required("Email is required"),
+
+    password: Yup.string()
+      .required("Password is required")
+      .min(6, "Password too short - 6 char minimum"),
+  });
 
   const [membershipValue, setMembershipValue] = useState("");
   const [state, setState] = useState({ visible: false });
   // console.log(`membership in courses form : ${membership}`);
-
   const show = () => {
     setState({ visible: true });
   };
@@ -43,7 +53,47 @@ export default function SignInForm({
 
   const handleStripe = (token, _) => {
     console.log(token);
-    if (payment === "set") {
+    if (productsData !== undefined) {
+      axios
+        .put("http://localhost:3000/products/productCustomers", {
+          productsData,
+          email: formData.email,
+        })
+        .then((response) => {
+          console.log("product buyers has been updated");
+        })
+        .catch((error) => {
+          if (error.response) {
+            toast(`${error.response.data} in product customers`, {
+              type: "error",
+            });
+          }
+        });
+
+      axios
+        .post("http://localhost:3000/products/productPayment", {
+          token,
+          totalPrice,
+        })
+        .then((response) => {
+          const { status } = response.data;
+
+          if (status === "success") {
+            toast(`Success! Payment has been made`, {
+              type: "info",
+            });
+            console.log("payment has been made");
+          }
+        })
+        .catch((error) => {
+          if (error.response) {
+            toast(`${error.response.data} in stripe payment`, {
+              type: "error",
+            });
+          } else
+            toast(`failed to make payment due to error`, { type: "error" });
+        });
+    } else if (payment === "set") {
       const response = axios
         .post("http://localhost:3000/members/payment", {
           membership,
@@ -102,18 +152,6 @@ export default function SignInForm({
     setStripe(true);
   };
 
-  const initialValues = {
-    email: "",
-    password: "",
-  };
-  const SignInSchema = Yup.object().shape({
-    email: Yup.string().email().required("Email is required"),
-
-    password: Yup.string()
-      .required("Password is required")
-      .min(6, "Password too short - 6 char minimum"),
-  });
-
   return (
     <div>
       <Formik
@@ -131,6 +169,9 @@ export default function SignInForm({
               });
               setStripe(false);
               setMembershipValue(response.data.type);
+              setData({
+                email: initialValues.email,
+              });
             })
             .catch((error) => {
               if (error.response) {
@@ -234,7 +275,7 @@ export default function SignInForm({
                       Not a User?
                     </button>
                     <Rodal
-                      height={400}
+                      height={440}
                       width={550}
                       visible={state.visible}
                       onClose={hide}
@@ -252,7 +293,19 @@ export default function SignInForm({
                       >
                         Course Enrollment
                       </h2>
-                      <MemberShipForm type={"course"} />
+                      <MemberShipForm
+                        type={"course"}
+                        totalPrice={
+                          membershipValue === "Gold"
+                            ? price * 25
+                            : membershipValue === "Standard"
+                            ? price * 75
+                            : membershipValue === "Pro"
+                            ? price * 50
+                            : price
+                        }
+                        course={course}
+                      />
                     </Rodal>
                   </div>
                 ) : (
@@ -283,7 +336,9 @@ export default function SignInForm({
           token={handleStripe}
           name={"Payment SetUp"}
           amount={
-            payment === "set"
+            totalPrice !== undefined
+              ? totalPrice * 100
+              : payment === "set"
               ? membership === "Standard"
                 ? 12 * 100
                 : membership === "Pro"

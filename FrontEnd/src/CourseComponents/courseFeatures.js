@@ -21,6 +21,8 @@ export default function Features({
   shift,
   payment,
   membership,
+  productsData,
+  totalPrice,
 }) {
   const [coursePrice, setCoursePrice] = useState();
   const [state, setState] = useState({ visible: false });
@@ -34,7 +36,7 @@ export default function Features({
   };
 
   useEffect(() => {
-    console.log("access token :", accessToken);
+    // console.log("access token :", accessToken);
     axios
       .get("http://localhost:3000/members/authorize", {
         headers: {
@@ -42,7 +44,7 @@ export default function Features({
         },
       })
       .then((response) => {
-        console.log("Id name:", response.data.id);
+        // console.log("Id name:", response.data.id);
         axios
           .get(
             `http://localhost:3000/members/membershipStatus/${response.data.id}`
@@ -189,13 +191,25 @@ export default function Features({
             >
               Payment SetUp
             </h2>
-            <SignInForm
-              type={"course"}
-              membership={membership}
-              payment={"set"}
-              price={price}
-              course={name}
-            />
+            {productsData === undefined ? (
+              <SignInForm
+                type={"course"}
+                membership={membership}
+                payment={"set"}
+                price={price}
+                course={name}
+              />
+            ) : (
+              <SignInForm
+                type={"course"}
+                membership={membership}
+                payment={"set"}
+                price={price}
+                course={name}
+                productsData={productsData}
+                totalPrice={totalPrice}
+              />
+            )}
           </Rodal>
         </div>
       );

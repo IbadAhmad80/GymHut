@@ -6,6 +6,25 @@ const stripe = require("stripe")(
 );
 const uuid = require("uuid");
 
+const updateProduct = async (productsData, product, index, email) => {
+  try {
+    const member = await Products.updateOne(
+      { name: product },
+      {
+        $push: {
+          buyers: {
+            email: email,
+            quanity: productsData.quantity[index],
+            total: productsData.price[index],
+          },
+        },
+      }
+    );
+  } catch (error) {
+    console.log("error", error);
+  }
+};
+
 router.get("/allProducts", async (req, res) => {
   try {
     const products = await Products.find();
@@ -57,15 +76,13 @@ router.get("/:name", async (req, res) => {
 
 router.put("/productCustomers", async (req, res) => {
   try {
-    console.log(`product name ${req.body.name}`);
-    console.log(
-      `email ${req.body.data.email} \n user ${req.body.data.name} \n product quantity ${req.body.data.quantity}`
+    const { productsData, email } = req.body;
+    let member;
+    // console.log("products data", productsData);
+    productsData.products.map((product, index) =>
+      updateProduct(productsData, product, index, email)
     );
-    const product = Products.updateOne(
-      { name: req.body.name },
-      { $push: { buyers: req.body.data } }
-    );
-    res.json(product);
+    res.status(200).send("Updatation Completed");
   } catch (error) {
     console.log(`error is : ${error}`);
     res.status(401).send(error);
@@ -74,24 +91,25 @@ router.put("/productCustomers", async (req, res) => {
 
 router.post("/productPayment", async (req, res) => {
   try {
-    console.log(req.body.token);
+    const { token, totalPrice } = req.body;
+    // console.log(token);
     const customer = await stripe.customers.create({
-      email: req.body.token.email,
-      source: req.body.token.id,
+      email: token.email,
+      source: token.id,
     });
 
-    const idempotencyKey = uuid.v4();
+    const idempotency_key = uuid.v4();
 
     const charge = await stripe.charges.create(
       {
-        amount: req.body.totalPrice,
+        amount: totalPrice * 100,
         currency: "usd",
-        customer: customer,
-        receipt_email: req.body.token.email,
-        description: `Purchased the ${req.body.totalPrice}$ prodcucts from Gym Accesories`,
+        customer: customer.id,
+        receipt_email: token.email,
+        description: `Purchased the ${totalPrice}$ prodcucts from Gym Accesories`,
       },
       {
-        idempotencyKey,
+        idempotency_key,
       }
     );
     status = "success";

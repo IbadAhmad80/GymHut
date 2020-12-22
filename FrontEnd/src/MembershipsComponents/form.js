@@ -20,6 +20,7 @@ export default function MemberShipForm({
   productsData,
   accountData,
   totalPrice,
+  course,
 }) {
   const [state, setState] = useState({ visible: false });
   const [formData, setData] = useState({ name: "", email: "" });
@@ -41,53 +42,13 @@ export default function MemberShipForm({
 
   const [stripe, setStripe] = useState(true);
 
-  const productPayment = (name, index) => {
-    const data = {
-      name: formData.name,
-      email: formData.email,
-      quantity: productsData.quantity[index],
-      price: productsData.price[index],
-    };
-    axios
-      .put("http://localhost:3000/products/productCustomers", {
-        name,
-        data,
-      })
-      .then((response) => {
-        const { status } = response.data;
-
-        if (status === "success") {
-          console.log("product buyers has been updated");
-        }
-      })
-      .catch((error) => {
-        if (error.response) {
-          toast(`${error.response.data} in product customers`, {
-            type: "error",
-          });
-        }
-      });
-  };
   const handleStripe = (token, _) => {
     console.log(token);
     if (payment === "product") {
-      productsData.products.map((productName, index) =>
-        productPayment(productName, index)
-      );
       axios
-        .post("http://localhost:3000/products/productPayment", {
-          token,
-          totalPrice,
-        })
-        .then((response) => {
-          const { status } = response.data;
-
-          if (status === "success") {
-            toast(`Success! Payment has been made`, {
-              type: "info",
-            });
-            console.log("payment has been made");
-          }
+        .put("http://localhost:3000/products/productCustomers", {
+          productsData,
+          email: formData.email,
         })
         .catch((error) => {
           if (error.response) {
@@ -97,6 +58,28 @@ export default function MemberShipForm({
           } else
             toast(`failed to make payment due to error`, { type: "error" });
         });
+    } else if (type === "course") {
+      const coursePrice = totalPrice * 100;
+      axios
+        .post("http://localhost:3000/courses/enrollment", {
+          course,
+          coursePrice,
+          token,
+        })
+        .then((response) => {
+          console.log("Response:", response.data);
+          const { status } = response.data;
+
+          if (status === "success") {
+            toast(`Success! Enrolled in ${course}`, { type: "info" });
+          }
+        })
+        .catch((error) => {
+          if (error.response) {
+            toast(`${error.response.data}`, { type: "error" });
+          }
+        });
+      setStripe(true);
     } else {
       axios
         .post("http://localhost:3000/members/payment", {
@@ -348,17 +331,22 @@ export default function MemberShipForm({
       {type === "membership" ? (
         <Features membership={membership} payment={"set"} hide={hide} />
       ) : type === "product" ? (
-        <Features payment={payment} hide={hide} />
+        <Features
+          payment={payment}
+          hide={hide}
+          productsData={productsData}
+          totalPrice={totalPrice}
+        />
       ) : (
         console.log("")
       )}
 
-      {type === "membership" || type === "product" ? (
+      {type === "membership" || type === "product" || type === "course" ? (
         <div
           style={{
             marginTop: "2vw",
             textAlign: "center",
-            marginLeft: "22%",
+            marginLeft: type === "course" ? "0%" : "22%",
           }}
         >
           <StripeCheckout

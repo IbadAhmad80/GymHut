@@ -42,7 +42,16 @@ export default function Products() {
           .catch((error) => {
             console.log("error is :", error);
           })
-      : console.log("");
+      : axios
+          .get(`http://localhost:3000/products`)
+          .then((response) => {
+            setProducts({ items: response.data });
+            isLoading(true);
+            setLoad(true);
+          })
+          .catch((error) => {
+            console.log("error is :", error);
+          });
   };
 
   const handleSubmit = (event) => {

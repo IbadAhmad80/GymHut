@@ -21,7 +21,9 @@ import hoddie_3 from "../assets/hoddie_3.jpg";
 import protien_1 from "../assets/protien_1.jpg";
 import protien_2 from "../assets/protien_2.jpg";
 import protien_3 from "../assets/protien_3.jpg";
+import axios from "axios";
 import { BsFillTrashFill } from "react-icons/bs";
+import StripeCheckout from "react-stripe-checkout";
 import { incProd, decProd, removeProd, removeAll } from "./actions";
 import "rodal/lib/rodal.css";
 import { toast } from "react-toastify";
@@ -43,10 +45,6 @@ export default function ProductCart() {
   const hide = () => {
     setState({ visible: false });
   };
-
-  // const handlePayment = (name, price) => {
-  //   alert(`price : ${price} \n product ${name}`);
-  // };
 
   const incrementProd = (name) => {
     dispatch(incProd(name));
@@ -74,6 +72,44 @@ export default function ProductCart() {
       (prod, index) => (totalBill += parseInt(product.price[index]))
     );
     return totalBill;
+  };
+
+  const handleStripe = (token, _) => {
+    // console.log(token);
+    axios
+      .put("http://localhost:3000/products/productCustomers", {
+        productsData: product,
+        email: accountData.userId,
+      })
+      .catch((error) => {
+        if (error.response) {
+          toast(`${error.response.data} in stripe payment`, {
+            type: "error",
+          });
+        } else toast(`failed to make payment due to error`, { type: "error" });
+      });
+    axios
+      .post("http://localhost:3000/products/productPayment", {
+        token,
+        totalPrice: calculateBill() + Math.ceil((calculateBill() * 2) / 100),
+      })
+      .then((response) => {
+        const { status } = response.data;
+
+        if (status === "success") {
+          toast(`Success! Payment has been made`, {
+            type: "info",
+          });
+          console.log("payment has been made");
+        }
+      })
+      .catch((error) => {
+        if (error.response) {
+          toast(`${error.response.data} in stripe payment`, {
+            type: "error",
+          });
+        } else toast(`failed to make payment due to error`, { type: "error" });
+      });
   };
   return (
     <div>
@@ -190,41 +226,53 @@ export default function ProductCart() {
               Total Bill :{" "}
               {calculateBill() + Math.ceil((calculateBill() * 2) / 100)}$
             </h6>
-            <button className={Styles.paymentButton} onClick={show}>
-              Continue Payment
-            </button>
-            {accountData.userName === "" ? (
-              <Rodal
-                height={430}
-                width={550}
-                visible={state.visible}
-                onClose={hide}
-                enterAnimation={"flip"}
-                duration={500}
-                leaveAnimation={"slideUp"}
+            {accountData.userName !== "" ? (
+              <StripeCheckout
+                stripeKey="pk_test_51HndUcEynMwgZp7ZbDkkWsib4j8KiQJSN1m0B5GyvLpbNBmKflvbEBOJvTkAOMrF8HVWttyYeg0h6cO4WgvPbgpv00bxeRO8cs"
+                token={handleStripe}
+                name={"Payment SetUp"}
+                amount={
+                  (calculateBill() + Math.ceil((calculateBill() * 2) / 100)) *
+                  100
+                }
               >
-                <h2
-                  style={{
-                    fontFamily: "Verdana, Geneva, Tahoma, sans-serif",
-                    fontsize: "1.2vw",
-                    fontWeight: "bolder",
-                    textAlign: "center",
-                  }}
-                >
-                  Product Payment
-                </h2>
-                <MemberShipForm
-                  type={"product"}
-                  payment={"product"}
-                  productsData={product}
-                  accountData={accountData}
-                  totalPrice={
-                    calculateBill() + Math.ceil((calculateBill() * 2) / 100)
-                  }
-                />
-              </Rodal>
+                <button className={Styles.paymentButton}>Pay with Card</button>
+              </StripeCheckout>
             ) : (
-              console.log("Have to sign in first for product payment")
+              <div>
+                <button className={Styles.paymentButton} onClick={show}>
+                  Continue Payment
+                </button>
+                <Rodal
+                  height={430}
+                  width={550}
+                  visible={state.visible}
+                  onClose={hide}
+                  enterAnimation={"flip"}
+                  duration={500}
+                  leaveAnimation={"slideUp"}
+                >
+                  <h2
+                    style={{
+                      fontFamily: "Verdana, Geneva, Tahoma, sans-serif",
+                      fontsize: "1.2vw",
+                      fontWeight: "bolder",
+                      textAlign: "center",
+                    }}
+                  >
+                    Product Payment
+                  </h2>
+                  <MemberShipForm
+                    type={"product"}
+                    payment={"product"}
+                    productsData={product}
+                    accountData={accountData}
+                    totalPrice={
+                      calculateBill() + Math.ceil((calculateBill() * 2) / 100)
+                    }
+                  />
+                </Rodal>
+              </div>
             )}
           </div>
         </div>
