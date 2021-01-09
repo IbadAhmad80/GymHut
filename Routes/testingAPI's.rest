@@ -1,0 +1,27 @@
+###
+
+POST http://localhost:8000/members/signIn
+content-type: application/json
+
+{
+// "fullName":"ibad",
+"email":"ibad23ahmad@gmail.com",
+"password":"22222222"
+// "phoneNumber":"921111111111",
+// "type":"Gold"
+}
+
+###
+GET http://localhost:8000/courses/popular
+content-type: application/json
+
+###
+
+GET http://localhost:8000/members/authorize
+content-type: application/json
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJuYW1lIjoiaWJhZDIzYWhtYWRAZ21haWwuY29tIiwiaWF0IjoxNjA2NjU3NDkxfQ.x65pFy3t48BwIfrsc91D3YlOZEAUr7lRVhKh5JPuIZc
+
+
+###
+GET http://localhost:8000/products
+content-type: application/json
