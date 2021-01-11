@@ -1,5 +1,7 @@
 const express = require("express");
 const router = express.Router();
+const Subscriber = require("../Schemas/subcribersSchema");
+
 var nodemailer = require("nodemailer");
 
 var transporter = nodemailer.createTransport({
@@ -9,6 +11,8 @@ var transporter = nodemailer.createTransport({
     pass: "flourida123",
   },
 });
+
+const status = "";
 
 router.post("/:email", async (req, res) => {
   var mailOptions = {
@@ -23,10 +27,21 @@ router.post("/:email", async (req, res) => {
 
   transporter.sendMail(mailOptions, function (error, info) {
     if (error) {
-      res.status(403).send("Error occured");
+      res.status(401).send("Error occured");
     } else {
-      res.json({ message: info });
+      status = "success";
     }
   });
+  try {
+    const subcriber = new Subscriber({
+      subscriberId: req.params.email,
+    });
+    subcriber.save().then((data) => {
+      res.json(data);
+    });
+  } catch (error) {
+    // console.log(error);
+    res.status(403).send("Error occured");
+  }
 });
 module.exports = router;

@@ -9,11 +9,13 @@ import { toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import { useDispatch } from "react-redux";
 import { signIn, logIn } from "./actions";
+import Loader from "react-loader-spinner";
 
 const Sidebar = () => {
   const location = useLocation();
   const dispatch = useDispatch();
   const history = useHistory();
+  const [state, setState] = useState("");
 
   const [data, setData] = useState({
     membership: "none",
@@ -29,6 +31,7 @@ const Sidebar = () => {
   });
   const setSignUp = (event) => {
     event.preventDefault();
+    setState("complete");
     console.log("object :", event);
     console.log(data.email, data.fullName, data.phoneNumber, data.password);
     axios
@@ -57,6 +60,7 @@ const Sidebar = () => {
       .catch((error) => {
         console.log(`error in   : ${error}`);
         if (error.response) {
+          setState("");
           toast(`${error.response.data}`, { type: "error" });
         }
       });
@@ -64,6 +68,7 @@ const Sidebar = () => {
 
   const setSignIn = (event) => {
     event.preventDefault();
+    setState("complete");
     axios
       .post("http://localhost:8000/members/signIn", signInData)
       .then((response) => {
@@ -91,6 +96,7 @@ const Sidebar = () => {
       })
       .catch((error) => {
         if (error.response) {
+          setState("");
           toast(`${error.response.data}`, { type: "error" });
         }
       });
@@ -132,7 +138,28 @@ const Sidebar = () => {
         />
 
         <button type="submit" value="Submit">
-          Sign Up
+          {state === "complete" ? (
+            <div
+              style={{
+                display: "flex",
+                marginTop: "0.8vw",
+                paddingLeft: "7vw",
+              }}
+            >
+              Creating{" "}
+              <span>
+                <Loader
+                  type="Oval"
+                  color="white"
+                  height={20}
+                  width={40}
+                  timeout={1000000} //1000 secs
+                />
+              </span>
+            </div>
+          ) : (
+            <span>Sign Up </span>
+          )}
         </button>
       </Form>
       <div>
@@ -183,7 +210,32 @@ const Sidebar = () => {
           }
         />
 
-        <button>Sign In</button>
+        <button>
+          {" "}
+          {state === "complete" ? (
+            <div
+              style={{
+                display: "flex",
+                marginTop: "0.8vw",
+                paddingLeft: "7vw",
+              }}
+            >
+              Retrieving{" "}
+              <span>
+                <Loader
+                  // style={{ marginTop: "1vw" }}
+                  type="Oval"
+                  color="white"
+                  height={20}
+                  width={40}
+                  timeout={1000000} //1000 secs
+                />
+              </span>
+            </div>
+          ) : (
+            <span>Sign In </span>
+          )}
+        </button>
       </Form>
       <div>
         <Terms>

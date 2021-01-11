@@ -10,13 +10,13 @@ export default function UpvotePost() {
       <div className={Styles.content}>like the post ?</div>
       <div className={Styles.logos}>
         <a href="https://www.facebook.com/home.php?ref=wizard" target="_blank">
-          <FaFacebookSquare style={{ color: "black", fontSize: "1.8vw" }} />
+          <FaFacebookSquare style={{ color: " #0033cc", fontSize: "1.8vw" }} />
         </a>
         <a href="https://mobile.twitter.com/login" target="_blank">
-          <FaTwitterSquare style={{ color: "black", fontSize: "1.8vw" }} />
+          <FaTwitterSquare style={{ color: "#4d94ff", fontSize: "1.8vw" }} />
         </a>
         <a href="https://www.linkedin.com/login/" target="_blank">
-          <FaLinkedin style={{ color: "black", fontSize: "1.8vw" }} />
+          <FaLinkedin style={{ color: "#006699", fontSize: "1.8vw" }} />
         </a>
       </div>
     </div>

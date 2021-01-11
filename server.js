@@ -9,6 +9,7 @@ const Queries = require("./Routes/contactRoutes");
 const Products = require("./Routes/productRoutes");
 const Email = require("./Routes/sendEmail");
 const cors = require("cors");
+const path = require("path");
 
 //parsing the post request for all the routes
 app.use(body_parser.json());
@@ -18,7 +19,7 @@ app.use(cors());
 
 //Connecting to the database
 mongoose.connect(
-  process.env.MONGODB_PASS,
+  process.env.MONGODB_URI || process.env.MONGODB_PASS,
   { useNewUrlParser: true, useUnifiedTopology: true },
   () => {
     console.log("Up and running with mongoDB");
@@ -40,9 +41,10 @@ app.use("/contact", Queries);
 //middleware forthe product
 app.use("/products", Products);
 
+//middleware forthe ema
 app.use("/sendEmail", Email);
 
-const PORT = 8000;
+const PORT = process.env.PORT || 8000;
 
 //serve static assets if in production
 if (process.env.NODE_ENV === "production") {

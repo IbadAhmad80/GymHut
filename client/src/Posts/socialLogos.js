@@ -43,6 +43,7 @@ export default function SocialLogos() {
             paddingTop: "0.4vw",
             paddingBottom: "0.4vw",
             backgroundColor: "white",
+            color: " #0033cc",
           }}
           href="https://www.facebook.com/home.php?ref=wizard"
           target="_blank"
@@ -56,6 +57,7 @@ export default function SocialLogos() {
             paddingTop: "0.4vw",
             paddingBottom: "0.4vw",
             backgroundColor: "white",
+            color: "#4d94ff",
           }}
           href="https://mobile.twitter.com/login"
           target="_blank"
@@ -69,6 +71,7 @@ export default function SocialLogos() {
             paddingTop: "0.4vw",
             paddingBottom: "0.4vw",
             backgroundColor: "white",
+            color: "#cc0000",
           }}
           href="https://www.pinterest.com/login/"
           target="_blank"
@@ -83,6 +86,7 @@ export default function SocialLogos() {
             paddingTop: "0.4vw",
             paddingBottom: "0.4vw",
             backgroundColor: "white",
+            color: "#006699",
           }}
           href="https://www.linkedin.com/login/"
           target="_blank"
@@ -96,6 +100,7 @@ export default function SocialLogos() {
             paddingTop: "0.4vw",
             paddingBottom: "0.4vw",
             backgroundColor: "white",
+            color: "#ff5050",
           }}
           href="https://www.instagram.com/accounts/login/"
           target="_blank"

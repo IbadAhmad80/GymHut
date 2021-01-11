@@ -2,6 +2,10 @@
   "name": "backend",
   "version": "0.1.0",
   "private": true,
+  "engines":{
+    "node": "12.x",
+    "npm":"6.x"
+  },
   "dependencies": {
     "@hapi/joi": "^17.1.1",
     "@testing-library/jest-dom": "^5.11.5",
@@ -25,15 +29,15 @@
     "web-vitals": "^0.2.4"
   },
   "scripts": {
-    "client-install": "npm install --prefix client",
-    "start": "node App.js",
-    "build": "npm run build",
+    "client-install": "cd client && npm install ",
+    "start": "node server.js",
+    "build": " cd client && npm run build",
     "test": "react-scripts test",
     "eject": "react-scripts eject",
-    "serve": "nodemon App.js",
-    "client": "npm start --prefix client",
-    "dev": "concurrently \"npm run serve\" \"npm run client\"",
-    "heroku-postbuild": "NPM_CONFIG_PRODUCTION=false npm install --prefix client && npm run build --prefix client"
+    "server": "nodemon server.js",
+    "client": "cd client npm start",
+    "dev": "concurrently \"npm run server\" \"npm run client\" ",
+    "heroku-postbuild": "NPM_CONFIG_PRODUCTION=false && npm run client-install  && npm run build"
   },
   "eslintConfig": {
     "extends": [
@@ -41,6 +45,7 @@
       "react-app/jest"
     ]
   },
+ 
   "browserslist": {
     "production": [
       ">0.2%",
