@@ -21,7 +21,7 @@ export default function Posts() {
       location.tag === undefined &&
       location.name === undefined ? (
         axios
-          .get("http://localhost:8000/posts")
+          .get("http://gymhut.herokuapp.com/posts")
           .then((response) => {
             setPosts({ singlePost: response.data });
             isLoading(true);
