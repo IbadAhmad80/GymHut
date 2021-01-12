@@ -46,13 +46,10 @@ app.use("/sendEmail", Email);
 
 const PORT = process.env.PORT || 8000;
 
-//serve static assets if in production
-if (process.env.NODE_ENV === "production") {
-  app.use(express.static("client/build"));
-  app.get("*", (req, res) => {
-    res.sendFile(path.resolve(__dirname, "client", "build", "index.html"));
-  });
-}
+//serve route if in production
+app.get("/", async (req, res) => {
+  res.status(200).send("Deployed on Heroku");
+});
 
 //listning to the port
 app.listen(PORT, () => {

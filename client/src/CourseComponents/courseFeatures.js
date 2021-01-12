@@ -38,7 +38,7 @@ export default function Features({
   useEffect(() => {
     // console.log("access token :", accessToken);
     axios
-      .get("http://localhost:8000/members/authorize", {
+      .get("https://gymhut.herokuapp.com/members/authorize", {
         headers: {
           Authorization: `Bearer ${accessToken}`,
         },
@@ -47,7 +47,7 @@ export default function Features({
         // console.log("Id name:", response.data.id);
         axios
           .get(
-            `http://localhost:8000/members/membershipStatus/${response.data.id}`
+            `https://gymhut.herokuapp.com/members/membershipStatus/${response.data.id}`
           )
           .then((response) => {
             // console.log("Memberhsip type :", response.data.id);
@@ -69,7 +69,7 @@ export default function Features({
   const handleStripe = (token, _) => {
     console.log(token);
     axios
-      .post("http://localhost:8000/courses/enrollment", {
+      .post("https://gymhut.herokuapp.com/courses/enrollment", {
         course: name,
         coursePrice,
         token,

@@ -48,7 +48,10 @@ export default function Model() {
             `Data sent to server is :\n height : ${initialValues.height} \n weight: ${initialValues.weight} \n female :${initialValues.female} \n male :${initialValues.male}`
           );
           axios
-            .post("http://127.0.0.1:5000/prediction/", JSON.stringify(formData))
+            .post(
+              "https://127.0.0.1:5000/prediction/",
+              JSON.stringify(formData)
+            )
             .then((response) => {
               console.log("BMI IS :", response.data);
               toast.success(`Sucess!! Prediction is been made`, {

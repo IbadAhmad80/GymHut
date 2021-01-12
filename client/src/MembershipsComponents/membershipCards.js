@@ -60,7 +60,7 @@ export default function MembersgipCards({
   const handleStripe = (token, _) => {
     console.log(token);
     const response = axios
-      .post("http://localhost:8000/members/payment", {
+      .post("https://gymhut.herokuapp.com/members/payment", {
         membership: heading_2,
         token,
       })

@@ -26,7 +26,7 @@ export default function Fotter() {
     console.log(data, response, e.target.email);
     if (response) {
       axios
-        .post(`http://localhost:8000/sendEmail/${e.target.email.value}`)
+        .post(`https://gymhut.herokuapp.com/sendEmail/${e.target.email.value}`)
         .then((response) => {
           toast.info("Subscribed!! Check Email ", {
             position: "top-center",

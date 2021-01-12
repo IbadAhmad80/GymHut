@@ -27,7 +27,7 @@ export default function PostDetails() {
   useEffect(() => {
     // retrieving the posts with same Author
     axios
-      .get(`http://localhost:8000/posts/author/${location.author}`)
+      .get(`https://gymhut.herokuapp.com/posts/author/${location.author}`)
       .then((response) => {
         setSameAut({ singlePost: response.data });
 
@@ -38,7 +38,7 @@ export default function PostDetails() {
       });
     // retrieving the posts with same category
     axios
-      .get(`http://localhost:8000/posts/category/${location.category}`)
+      .get(`https://gymhut.herokuapp.com/posts/category/${location.category}`)
       .then((response) => {
         setSameCat({ singlePost: response.data });
         isLoadingCat(true);

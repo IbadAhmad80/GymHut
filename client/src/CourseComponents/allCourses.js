@@ -21,7 +21,7 @@ export default function AllCourses() {
     const type =
       location.category === undefined
         ? axios
-            .get("http://localhost:8000/courses")
+            .get("https://gymhut.herokuapp.com/courses")
             .then((response) => {
               setCourse({ courses: response.data });
               isLoading(true);
@@ -30,7 +30,7 @@ export default function AllCourses() {
               console.log("error is :", error);
             })
         : axios
-            .get(`http://localhost:8000/courses/${location.category}`)
+            .get(`https://gymhut.herokuapp.com/courses/${location.category}`)
             .then((response) => {
               setCourse({ courses: response.data });
               isLoading(true);
@@ -42,7 +42,7 @@ export default function AllCourses() {
 
   const setAllCourses = () => {
     axios
-      .get(`http://localhost:8000/courses/AllCourses`)
+      .get(`https://gymhut.herokuapp.com/courses/AllCourses`)
       .then((response) => {
         setCourse({ courses: response.data });
 

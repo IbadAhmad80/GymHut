@@ -82,7 +82,7 @@ export default function ProductCart() {
   const handleStripe = (token, _) => {
     // console.log(token);
     axios
-      .put("http://localhost:8000/products/productCustomers", {
+      .put("https://gymhut.herokuapp.com/products/productCustomers", {
         productsData: product,
         email: accountData.userId,
       })
@@ -94,7 +94,7 @@ export default function ProductCart() {
         } else toast(`failed to make payment due to error`, { type: "error" });
       });
     axios
-      .post("http://localhost:8000/products/productPayment", {
+      .post("https://gymhut.herokuapp.com/products/productPayment", {
         token,
         totalPrice: calculateBill() + Math.ceil((calculateBill() * 2) / 100),
       })

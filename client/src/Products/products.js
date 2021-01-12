@@ -24,7 +24,7 @@ export default function Products() {
     setLoad(false);
     event.target.value === "Highest"
       ? axios
-          .get(`http://localhost:8000/products/pricey`)
+          .get(`https://gymhut.herokuapp.com/products/pricey`)
           .then((response) => {
             setProducts({ items: response.data });
             isLoading(true);
@@ -34,7 +34,7 @@ export default function Products() {
           })
       : event.target.value === "Lowest"
       ? axios
-          .get(`http://localhost:8000/products/cheapest`)
+          .get(`https://gymhut.herokuapp.com/products/cheapest`)
           .then((response) => {
             setProducts({ items: response.data });
             isLoading(true);
@@ -43,7 +43,7 @@ export default function Products() {
             console.log("error is :", error);
           })
       : axios
-          .get(`http://localhost:8000/products`)
+          .get(`https://gymhut.herokuapp.com/products`)
           .then((response) => {
             setProducts({ items: response.data });
             isLoading(true);
@@ -63,7 +63,7 @@ export default function Products() {
     isLoading(false);
     setLoad(true);
     axios
-      .get(`http://localhost:8000/products/${values.name}`)
+      .get(`https://gymhut.herokuapp.com/products/${values.name}`)
       .then((response) => {
         setProducts({ items: response.data });
         setValues({ name: "" });
@@ -76,7 +76,7 @@ export default function Products() {
 
   useEffect(() => {
     axios
-      .get("http://localhost:8000/products")
+      .get("https://gymhut.herokuapp.com/products")
       .then((response) => {
         setProducts({ items: response.data });
         isLoading(true);
@@ -88,7 +88,7 @@ export default function Products() {
 
   const setAllProducts = () => {
     axios
-      .get("http://localhost:8000/products/allProducts")
+      .get("https://gymhut.herokuapp.com/products/allProducts")
       .then((response) => {
         setProducts({ items: response.data });
         isLoading(true);

@@ -35,7 +35,7 @@ const Sidebar = () => {
     console.log("object :", event);
     console.log(data.email, data.fullName, data.phoneNumber, data.password);
     axios
-      .post("http://localhost:8000/members", data)
+      .post("https://gymhut.herokuapp.com/members", data)
       .then((response) => {
         toast("Account has been created successfully", {
           type: "success",
@@ -70,7 +70,7 @@ const Sidebar = () => {
     event.preventDefault();
     setState("complete");
     axios
-      .post("http://localhost:8000/members/signIn", signInData)
+      .post("https://gymhut.herokuapp.com/members/signIn", signInData)
       .then((response) => {
         toast("Account has been accessed successfully", {
           type: "success",

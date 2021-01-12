@@ -22,7 +22,7 @@ export default function Membership() {
 
   useEffect(() => {
     axios
-      .get("http://localhost:8000/courses/popular")
+      .get("https://gymhut.herokuapp.com/courses/popular")
       .then((response) => {
         setCourse({ courses: response.data });
         isLoading(true);

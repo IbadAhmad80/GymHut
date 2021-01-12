@@ -46,7 +46,7 @@ export default function MemberShipForm({
     console.log(token);
     if (payment === "product") {
       axios
-        .put("http://localhost:8000/products/productCustomers", {
+        .put("https://gymhut.herokuapp.com/products/productCustomers", {
           productsData,
           email: formData.email,
         })
@@ -61,7 +61,7 @@ export default function MemberShipForm({
     } else if (type === "course") {
       const coursePrice = totalPrice * 100;
       axios
-        .post("http://localhost:8000/courses/enrollment", {
+        .post("https://gymhut.herokuapp.com/courses/enrollment", {
           course,
           coursePrice,
           token,
@@ -82,7 +82,7 @@ export default function MemberShipForm({
       setStripe(true);
     } else {
       axios
-        .post("http://localhost:8000/members/payment", {
+        .post("https://gymhut.herokuapp.com/members/payment", {
           membership,
           token,
         })
@@ -130,7 +130,7 @@ export default function MemberShipForm({
           initialValues.phoneNumber = values.phoneNumber;
           setStripe(true);
           axios
-            .post("http://localhost:8000/members", initialValues)
+            .post("https://gymhut.herokuapp.com/members", initialValues)
             .then((response) => {
               toast("Account has been created successfully", {
                 type: "success",

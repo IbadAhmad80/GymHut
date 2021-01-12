@@ -55,7 +55,7 @@ export default function SignInForm({
     console.log(token);
     if (productsData !== undefined) {
       axios
-        .put("http://localhost:8000/products/productCustomers", {
+        .put("https://gymhut.herokuapp.com/products/productCustomers", {
           productsData,
           email: formData.email,
         })
@@ -71,7 +71,7 @@ export default function SignInForm({
         });
 
       axios
-        .post("http://localhost:8000/products/productPayment", {
+        .post("https://gymhut.herokuapp.com/products/productPayment", {
           token,
           totalPrice,
         })
@@ -95,7 +95,7 @@ export default function SignInForm({
         });
     } else if (payment === "set") {
       const response = axios
-        .post("http://localhost:8000/members/payment", {
+        .post("https://gymhut.herokuapp.com/members/payment", {
           membership,
           token,
         })
@@ -130,7 +130,7 @@ export default function SignInForm({
           ? price * 50
           : price * 25;
       axios
-        .post("http://localhost:8000/courses/enrollment", {
+        .post("https://gymhut.herokuapp.com/courses/enrollment", {
           course,
           coursePrice,
           token,
@@ -162,7 +162,7 @@ export default function SignInForm({
           initialValues.email = values.email;
           initialValues.password = values.password;
           axios
-            .post("http://localhost:8000/members/signIn", initialValues)
+            .post("https://gymhut.herokuapp.com/members/signIn", initialValues)
             .then((response) => {
               toast("Account has been accessed successfully", {
                 type: "success",

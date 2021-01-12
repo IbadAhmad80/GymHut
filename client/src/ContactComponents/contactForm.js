@@ -69,7 +69,7 @@ export default function ContactForm() {
             initialValues.lastName = values.lastName;
             initialValues.message = values.message;
             axios
-              .post("http://localhost:8000/contact", initialValues)
+              .post("https://gymhut.herokuapp.com/contact", initialValues)
               .then((response) => {
                 toast.success("Your Query has been recorded successfully", {
                   position: "top-center",

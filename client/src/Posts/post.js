@@ -21,7 +21,7 @@ export default function Posts() {
       location.tag === undefined &&
       location.name === undefined ? (
         axios
-          .get("http://gymhut.herokuapp.com/posts")
+          .get("https://gymhut.herokuapp.com/posts")
           .then((response) => {
             setPosts({ singlePost: response.data });
             isLoading(true);
@@ -32,7 +32,7 @@ export default function Posts() {
       ) : location.tag !== undefined ? (
         // retrieving the posts with same Tags
         axios
-          .get(`http://localhost:8000/posts/tags/${location.tag}`)
+          .get(`https://gymhut.herokuapp.com/posts/tags/${location.tag}`)
           .then((response) => {
             setPosts({ singlePost: response.data });
             isLoading(true);
@@ -43,7 +43,9 @@ export default function Posts() {
       ) : location.category !== undefined ? (
         // retrieving the posts with same Category
         axios
-          .get(`http://localhost:8000/posts/category/${location.category}`)
+          .get(
+            `https://gymhut.herokuapp.com/posts/category/${location.category}`
+          )
           .then((response) => {
             setPosts({ singlePost: response.data });
             isLoading(true);
@@ -54,7 +56,9 @@ export default function Posts() {
       ) : location.name !== undefined ? (
         // retrieving the posts with specific name
         axios
-          .get(`http://localhost:8000/posts/findPost?findPost=${location.name}`)
+          .get(
+            `https://gymhut.herokuapp.com/posts/findPost?findPost=${location.name}`
+          )
           .then((response) => {
             setPosts({ singlePost: response.data });
             isLoading(true);
