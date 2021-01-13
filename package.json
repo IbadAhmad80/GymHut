@@ -2,9 +2,9 @@
   "name": "backend",
   "version": "0.1.0",
   "private": true,
-  "engines":{
+  "engines": {
     "node": "12.x",
-    "npm":"6.x"
+    "npm": "6.x"
   },
   "dependencies": {
     "@hapi/joi": "^17.1.1",
@@ -16,6 +16,8 @@
     "dotenv": "^8.1.0",
     "emailjs-com": "^2.6.4",
     "express": "^4.17.1",
+    "jquery": "^3.5.1",
+    "jquery-mapael": "^2.2.0",
     "jsonwebtoken": "^8.5.1",
     "mongoose": "^5.10.11",
     "nodemailer": "^6.4.17",
@@ -29,7 +31,6 @@
     "web-vitals": "^0.2.4"
   },
   "scripts": {
-    
     "start": "node server.js",
     "build": " cd client && npm run build",
     "test": "react-scripts test",
@@ -42,7 +43,6 @@
       "react-app/jest"
     ]
   },
- 
   "browserslist": {
     "production": [
       ">0.2%",

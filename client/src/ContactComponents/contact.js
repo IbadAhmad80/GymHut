@@ -58,43 +58,7 @@ export default function Contact() {
         <div className={Styles.formborderTop}>_</div>
         <div className={Styles.formHeading}>FAQ's</div>
 
-        <App
-          Question={"What are the timings of The Jym?"}
-          Answer={"Somwhere between 6am to 2am"}
-        />
-        <App
-          Question={
-            "From which course should i start my training program as a beginner?"
-          }
-          Answer={
-            "If you are absolute starter in this field , then try to go for our nutrition program.Simply Best."
-          }
-        />
-
-        <App
-          Question={"Are there any expert trainers in midnight shift too?"}
-          Answer={
-            "Yes there are , absolutely. Not lot of them but a bunch which are always there to sort out your task"
-          }
-        />
-
-        <App
-          Question={
-            "Tell me little about the history and developments of nutrition programs?"
-          }
-          Answer={
-            "It was started for the middleweight beginners and with time it has risen like none other. Huge thanks to our loyal customers."
-          }
-        />
-
-        <App
-          Question={
-            "What services do you get by availing the GOLD membership for straight year?"
-          }
-          Answer={
-            "Amount of discounts and accessories you get on this special offer are enough to keep you going with one more year or so."
-          }
-        />
+        <App />
       </div>
 
       <Fotter />
